@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
 header {
-  margin-top: 30px;
-  margin-left: 10px;
+  margin-top: 1.9em;
+  margin-left: 0.6em;
 }
 header > nav {
   text-align: center;
@@ -15,10 +15,13 @@ header > nav > ul {
   padding: 0px;
 }
 header > nav > ul > li {
+  display: inline-block;
+}
+header > nav > ul > li > .tag {
+  margin-bottom: 0.4em;
   font-family: "DM Sans";
   color: #901C1C;
   display: inline-block;
-  margin-bottom: 0.4em;
   font-weight: 600;
   font-size: 0.75em;
   border: 0.5px solid #C4C4C4;
@@ -26,10 +29,10 @@ header > nav > ul > li {
   padding: 2px;
   padding-left: 7px;
   padding-right: 7px;
-  cursor: pointer;
+  text-decoration: none;
   transition: all 0.3s;
 }
-header > nav > ul > li:hover, header > nav > ul > li:focus, header > nav > ul > li:active {
+header > nav > ul > li > .tag:hover, header > nav > ul > li > .tag:focus, header > nav > ul > li > .tag:active {
   color: white;
   background-color: #901C1C;
 }
@@ -41,6 +44,71 @@ header > h1 {
   position: absolute;
   right: 4.5%;
   top: 4.65%;
+}
+
+main {
+  margin-top: 0.3em;
+  margin-bottom: 5em;
+}
+main > section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+main > section > article {
+  text-align: center;
+  margin-top: 1.8em;
+  font-family: "DM Sans";
+}
+main > section > article > a {
+  text-decoration: none;
+}
+main > section > article > a > img {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  box-shadow: 0px 4px 10px -1px #0000003d;
+}
+main > section > article > a > h2 {
+  color: #D3573C;
+  font-size: 2.25em;
+  font-weight: normal;
+  margin-top: 0.5em;
+}
+main > section > article > .location {
+  color: #901C1C;
+  font-size: 13px;
+  font-weight: 400;
+  margin-top: -2.3em;
+}
+main > section > article > .tagline {
+  font-size: 10px;
+  font-weight: 400;
+  margin-top: -1em;
+}
+main > section > article > .price {
+  color: #757575;
+  font-size: 9px;
+  font-weight: 400;
+  margin-top: -0.8em;
+}
+main > section > article > .tag {
+  font-family: "DM Sans";
+  color: #901C1C;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.75em;
+  border: 0.5px solid #C4C4C4;
+  border-radius: 30px;
+  padding: 2px;
+  padding-left: 7px;
+  padding-right: 7px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+main > section > article > .tag:hover, main > section > article > .tag:focus, main > section > article > .tag:active {
+  color: white;
+  background-color: #901C1C;
 }
 
 /*# sourceMappingURL=style.css.map */

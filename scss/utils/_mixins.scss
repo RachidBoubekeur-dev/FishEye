@@ -16,3 +16,10 @@
         background-color: $color1;
     }
 }
+
+@mixin profilImg {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    box-shadow: 0px 4px 10px -1px #0000003d;
+}

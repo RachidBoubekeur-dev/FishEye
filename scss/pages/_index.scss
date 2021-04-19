@@ -1,8 +1,15 @@
+html {
+    scroll-behavior: smooth;
+}
+
 header {
     margin-top: 1.9em;
     margin-left: 0.6em;
     & > p {
-        display: none;
+        display: contents;
+        & > a {
+            display: none;
+        }
     }
     & > nav {
         text-align: center;
@@ -36,15 +43,28 @@ header {
 main {
     margin-top: 0.3em;
     margin-bottom: 5em;
+    & > p {
+        position: absolute;
+        width: 99%;
+        display: flex;
+        justify-content: center;*
+        & > img {
+            margin-top: 8%;
+            width: 180px;
+        }
+    }
     & > section {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        opacity: 0;
+        transition: all 1.2s;
         & > article {
             width: 303px;
             text-align: center;
-            margin-top: 1.8em;
             font-family: $police1;
+            margin-top: 1.8em;
+            transition: all 0.6s;
             & > a {
                 text-decoration: none;
                 & > img {
@@ -97,7 +117,7 @@ main {
         width: 92%;
         margin-left: auto;
         margin-right: auto;
-        & > p {
+        & > p > a {
             display: block;
             position: absolute;
             top: -50px;
@@ -110,6 +130,9 @@ main {
             padding-bottom: 2px;
             padding-top: 2px;
             border-radius: 4px;
+            text-decoration: none;
+            color: black;
+            cursor: pointer;
             transition: all 0.4s;
         }
         & > nav {

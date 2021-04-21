@@ -1,5 +1,17 @@
 html {
     scroll-behavior: smooth;
+    ::-webkit-scrollbar {
+        width: 9px;
+        height: 9px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: $color4;
+        border-radius: 5px;
+        &:hover, &:active {
+            background: $color2;
+        }
+    }
 }
 
 header {
@@ -9,6 +21,24 @@ header {
         display: contents;
         & > a {
             display: none;
+            position: absolute;
+            top: -50px;
+            left: 45%;
+            font-size: 18px;
+            font-family: $police1;
+            font-weight: 700;
+            background: $color4;
+            padding: 9px;
+            padding-bottom: 2px;
+            padding-top: 2px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: black;
+            cursor: pointer;
+            transition: all 0.4s;
+            &:hover {
+                background: darken($color4, 5%);
+            }
         }
     }
     & > nav {
@@ -47,11 +77,22 @@ main {
         position: absolute;
         width: 99%;
         display: flex;
-        justify-content: center;*
+        justify-content: center;
         & > img {
-            margin-top: 8%;
+            margin-top: 80px;
             width: 180px;
         }
+    }
+    & > noscript {
+        position: absolute;
+        top: 420px;
+        width: 99%;
+        display: flex;
+        justify-content: center;
+        color: $color1;
+        font-family: $police1;
+        font-size: 1.25em;
+        font-weight: 600;
     }
     & > section {
         display: flex;
@@ -75,6 +116,10 @@ main {
                     font-size: 2.25em;
                     font-weight: normal;
                     margin-top: 0.5em;
+                    transition: all 0.5s;
+                    &:hover {
+                        color: $color1;
+                    }
                 }
             }
             & > .location {
@@ -96,6 +141,8 @@ main {
             }
             & > .tag {
                 @include tag;
+                margin-right: 2.5px;
+                margin-left: 2.5px;
             }
         }
     }
@@ -119,21 +166,6 @@ main {
         margin-right: auto;
         & > p > a {
             display: block;
-            position: absolute;
-            top: -50px;
-            left: 45%;
-            font-size: 18px;
-            font-family: $police1;
-            font-weight: 700;
-            background: $color4;
-            padding: 9px;
-            padding-bottom: 2px;
-            padding-top: 2px;
-            border-radius: 4px;
-            text-decoration: none;
-            color: black;
-            cursor: pointer;
-            transition: all 0.4s;
         }
         & > nav {
             text-align: center;

@@ -23,6 +23,8 @@
     border-radius: 100px;
     box-shadow: 0px 4px 10px -1px #0000003d;
     transition: all 1s;
+    object-fit: cover;
+    font-family: 'object-fit: cover;'; 
     &:hover {
         filter: brightness(0.8);
     }

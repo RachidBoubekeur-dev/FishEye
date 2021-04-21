@@ -2,6 +2,17 @@
 html {
   scroll-behavior: smooth;
 }
+html ::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+html ::-webkit-scrollbar-thumb {
+  background: #DB8876;
+  border-radius: 5px;
+}
+html ::-webkit-scrollbar-thumb:hover, html ::-webkit-scrollbar-thumb:active {
+  background: #D3573C;
+}
 
 header {
   margin-top: 1.9em;
@@ -12,6 +23,24 @@ header > p {
 }
 header > p > a {
   display: none;
+  position: absolute;
+  top: -50px;
+  left: 45%;
+  font-size: 18px;
+  font-family: "DM Sans";
+  font-weight: 700;
+  background: #DB8876;
+  padding: 9px;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+header > p > a:hover {
+  background: #d67662;
 }
 header > nav {
   text-align: center;
@@ -66,9 +95,20 @@ main > p {
   display: flex;
   justify-content: center;
 }
-* main > p > img {
-  margin-top: 8%;
+main > p > img {
+  margin-top: 80px;
   width: 180px;
+}
+main > noscript {
+  position: absolute;
+  top: 420px;
+  width: 99%;
+  display: flex;
+  justify-content: center;
+  color: #901C1C;
+  font-family: "DM Sans";
+  font-size: 1.25em;
+  font-weight: 600;
 }
 main > section {
   display: flex;
@@ -93,6 +133,8 @@ main > section > article > a > img {
   border-radius: 100px;
   box-shadow: 0px 4px 10px -1px #0000003d;
   transition: all 1s;
+  object-fit: cover;
+  font-family: "object-fit: cover;";
 }
 main > section > article > a > img:hover {
   filter: brightness(0.8);
@@ -102,6 +144,10 @@ main > section > article > a > h2 {
   font-size: 2.25em;
   font-weight: normal;
   margin-top: 0.5em;
+  transition: all 0.5s;
+}
+main > section > article > a > h2:hover {
+  color: #901C1C;
 }
 main > section > article > .location {
   color: #901C1C;
@@ -133,6 +179,8 @@ main > section > article > .tag {
   padding-right: 7px;
   text-decoration: none;
   transition: all 0.3s;
+  margin-right: 2.5px;
+  margin-left: 2.5px;
 }
 main > section > article > .tag:hover, main > section > article > .tag:focus, main > section > article > .tag:active {
   color: white;
@@ -157,21 +205,6 @@ main > section > article > .tag:hover, main > section > article > .tag:focus, ma
   }
   header > p > a {
     display: block;
-    position: absolute;
-    top: -50px;
-    left: 45%;
-    font-size: 18px;
-    font-family: "DM Sans";
-    font-weight: 700;
-    background: #DB8876;
-    padding: 9px;
-    padding-bottom: 2px;
-    padding-top: 2px;
-    border-radius: 4px;
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
-    transition: all 0.4s;
   }
   header > nav {
     text-align: center;

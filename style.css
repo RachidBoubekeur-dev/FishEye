@@ -14,6 +14,32 @@ html ::-webkit-scrollbar-thumb:hover, html ::-webkit-scrollbar-thumb:active {
   background: #D3573C;
 }
 
+main {
+  margin-top: 0.3em;
+  margin-bottom: 5em;
+}
+main > p {
+  position: absolute;
+  width: 99%;
+  display: flex;
+  justify-content: center;
+}
+main > p > img {
+  margin-top: 80px;
+  width: 180px;
+}
+main > noscript {
+  position: absolute;
+  top: 420px;
+  width: 99%;
+  display: flex;
+  justify-content: center;
+  color: #901C1C;
+  font-family: "DM Sans";
+  font-size: 1.25em;
+  font-weight: 600;
+}
+
 header {
   margin-top: 1.9em;
   margin-left: 0.6em;
@@ -85,31 +111,6 @@ header > h1 {
   top: 4.65%;
 }
 
-main {
-  margin-top: 0.3em;
-  margin-bottom: 5em;
-}
-main > p {
-  position: absolute;
-  width: 99%;
-  display: flex;
-  justify-content: center;
-}
-main > p > img {
-  margin-top: 80px;
-  width: 180px;
-}
-main > noscript {
-  position: absolute;
-  top: 420px;
-  width: 99%;
-  display: flex;
-  justify-content: center;
-  color: #901C1C;
-  font-family: "DM Sans";
-  font-size: 1.25em;
-  font-weight: 600;
-}
 main > section {
   display: flex;
   flex-wrap: wrap;

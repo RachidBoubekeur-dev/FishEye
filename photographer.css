@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+html {
+  scroll-behavior: smooth;
+}
+html ::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+html ::-webkit-scrollbar-thumb {
+  background: #DB8876;
+  border-radius: 5px;
+}
+html ::-webkit-scrollbar-thumb:hover, html ::-webkit-scrollbar-thumb:active {
+  background: #D3573C;
+}
+
+main {
+  margin-top: 0.3em;
+  margin-bottom: 5em;
+}
+main > p {
+  position: absolute;
+  width: 99%;
+  display: flex;
+  justify-content: center;
+}
+main > p > img {
+  margin-top: 80px;
+  width: 180px;
+}
+main > noscript {
+  position: absolute;
+  top: 420px;
+  width: 99%;
+  display: flex;
+  justify-content: center;
+  color: #901C1C;
+  font-family: "DM Sans";
+  font-size: 1.25em;
+  font-weight: 600;
+}
+
+header {
+  margin-top: 3.45em;
+  margin-left: 3.75em;
+}
+
+/*# sourceMappingURL=photographer.css.map */

@@ -25,7 +25,7 @@
     transition: all 1s;
     object-fit: cover;
     font-family: 'object-fit: cover;'; 
-    &:hover {
+    &:hover, &:focus, &:active {
         filter: brightness(0.8);
     }
 }

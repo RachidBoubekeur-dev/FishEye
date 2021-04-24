@@ -65,7 +65,7 @@ header > p > a {
   cursor: pointer;
   transition: all 0.4s;
 }
-header > p > a:hover {
+header > p > a:hover, header > p > a:focus, header > p > a:active {
   background: #d67662;
 }
 header > nav {
@@ -137,7 +137,7 @@ main > section > article > a > img {
   object-fit: cover;
   font-family: "object-fit: cover;";
 }
-main > section > article > a > img:hover {
+main > section > article > a > img:hover, main > section > article > a > img:focus, main > section > article > a > img:active {
   filter: brightness(0.8);
 }
 main > section > article > a > h2 {
@@ -147,7 +147,7 @@ main > section > article > a > h2 {
   margin-top: 0.5em;
   transition: all 0.5s;
 }
-main > section > article > a > h2:hover {
+main > section > article > a > h2:hover, main > section > article > a > h2:focus, main > section > article > a > h2:active {
   color: #901C1C;
 }
 main > section > article > .location {

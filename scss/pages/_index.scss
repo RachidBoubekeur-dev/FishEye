@@ -20,7 +20,7 @@ header {
             color: black;
             cursor: pointer;
             transition: all 0.4s;
-            &:hover {
+            &:hover, &:focus, &:active {
                 background: darken($color4, 5%);
             }
         }
@@ -77,7 +77,7 @@ main > section {
                 font-weight: normal;
                 margin-top: 0.5em;
                 transition: all 0.5s;
-                &:hover {
+                &:hover, &:focus, &:active {
                     color: $color1;
                 }
             }

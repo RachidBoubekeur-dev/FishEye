@@ -1,4 +1,181 @@
 header {
-    margin-top: 3.45em;
-    margin-left: 3.75em;
+    width: 97%;
+    margin-top: 1.9em;
+    margin-left: auto;
+}
+
+main > section:nth-of-type(1) {
+    opacity: 0;
+    width: 94%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.5em;
+    font-family: $police1;
+    transition: all 0.4s;
+    & > div:nth-of-type(1) {
+        & > h1 {
+            color: $color2;
+            font-size: 2.15em;
+            font-weight: normal;
+            margin-top: 0.5em;
+            width: 70%;
+            max-width: 350px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        & > .location {
+            color: $color1;
+            font-size: 0.75em;
+            font-weight: 400;
+            margin-top: -2.7em;
+        }
+        & > .tagline {
+            font-size: 0.72em;
+            font-weight: 400;
+            margin-top: -0.8em;
+            margin-bottom: 0.2em;
+            color: $color3;
+        }
+        & > .tag {
+            @include tag;
+            font-size: 0.7em;
+            padding: 0px;
+            padding-left: 5px;
+            padding-right: 5px;
+            margin-right: 2px;
+            margin-left: 2px;
+            margin-bottom: 0.3em;
+        }
+    }
+    & > div:nth-of-type(2) {
+        width: 100%;
+        text-align: center;
+        position: fixed;
+        left: 0px;
+        bottom: 5%;
+        & > #contact {
+            color: white;
+            background: $color1;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.99em;
+            padding: 4px;
+            font-family: $police1;
+            width: 9.25em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.4s;
+            &:hover, &:focus, &:active {
+                color: black;
+                background-color: $color4;
+            }
+        }
+    }
+    & > p > img {
+        @include profilImg;
+        position: absolute;
+        top: 5.15em;
+        right: 5%;
+        width: 83px;
+        height: 83px;
+        top: 5.15em;
+        right: 6%;
+        &:hover, &:focus, &:active {
+            filter: none;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    main > section:nth-of-type(1) {
+        background: #FAFAFA;
+        padding: 25px;
+        padding-top: 15px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 5px;
+        display: flex;
+        & > div:nth-of-type(1) > h1 {
+            width: auto;
+            max-width: fit-content;
+            margin-right: 50px;
+        }
+        & > div:nth-of-type(2) {
+            width: auto;
+            position: initial;
+            top: initial;
+            margin-left: initial;
+            margin-left: initial;
+            margin-top: 1.2em;
+            & > #contact {
+                padding: initial;
+                width: 8em;
+                height: 2.5em;
+                font-size: 0.95em;
+            }
+        }
+        & > p > img {
+            top: 8.5em;
+        }
+    }
+}
+
+@media screen and (min-width: 1095px) {
+    header {
+        width: 92%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 3.4em;
+    }
+
+    main > section:nth-of-type(1) {
+        width: 87%;
+        padding: 35px;
+        padding-top: 23px;
+        & > div:nth-of-type(1) {
+            & > h1 {
+                font-size: 2.7em;
+            }
+            & > .location {
+                font-size: 1.08em;
+                margin-top: -2em;
+            }
+            & > .tagline {
+                font-size: 0.8em;
+                margin-top: -0.3em;
+                margin-bottom: 1em;
+            }
+            & > .tag {
+                font-size: 0.8em;
+                padding: 0px;
+                padding-left: 6px;
+                padding-right: 6px;
+            }
+        }
+        & > div:nth-of-type(2) {
+            margin-top: 1.55em;
+            & > #contact {
+                height: 3em;
+                font-size: 1em;
+            }
+        }
+        & > p > img {
+            width: 150px;
+            height: 150px;
+            top: 9.85em;
+            right: 8%;
+        }
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    main > section:nth-of-type(1) {
+        width: 1300px;
+        & > p > img {
+            margin-left: 725px;
+            position: initial;
+        }
+    }
 }

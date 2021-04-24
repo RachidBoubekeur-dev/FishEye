@@ -59,10 +59,10 @@ function clickArticleFiltreTag() {
 }
 
 /**
- * listPhotographers - stock la liste des photographes dans htmlListData
+ * dataPhotographer - stock la liste des photographes dans htmlListData
  * @param  {Array} photographers liste des photographes
  */
-function listPhotographers(photographers) {
+function dataPhotographer(photographers) {
  
     let htmlListData = "";
     // Parcours la liste des photographes
@@ -71,9 +71,9 @@ function listPhotographers(photographers) {
         // Parcours les tags du photographe
         for(let y = 0; y < photographers[i].tags.length; y++) {
             // Ajout successif des tags
-            htmlListTag += '<a href=\"#' + photographers[i].tags[y] + '\
-                " class=\"tag\" aria-label=\"Filtre portrait\
-                "><span>#' + photographers[i].tags[y] + '</span></a>';
+            htmlListTag += '<a href=\"#' + photographers[i].tags[y]
+            +'\" class=\"tag\" aria-label=\"Filtre ' + photographers[i].tags[y]
+            +'\"><span>#' + photographers[i].tags[y] + '</span></a>';
         }
         // Ajout successif des photographes
         htmlListData += "<article id=\"" + photographers[i].id + 
@@ -114,13 +114,13 @@ function listDataFiltre(photographers, filtre) {
                     if(photographers[i].tags[x] === filtre) {
                         // Ajout du tag égale au filtre
                         htmlListTag += '<a href=\"#' + photographers[i].tags[x]
-                        + '\" class=\"tag\" style=\"color:white;background-color:#901C1C\
-                        " aria-label=\"Filtre portrait\"><span>#' + photographers[i].tags[x] + '</span></a>';
+                        +'\" class=\"tag\" style=\"color:white;background-color:#901C1C\" aria-label=\"Filtre '
+                        + photographers[i].tags[x] + '\"><span>#' + photographers[i].tags[x] + '</span></a>';
                     } else {
                         // Ajout successif des autres tags
                         htmlListTag += '<a href=\"#' + photographers[i].tags[x]
-                        + '\" class=\"tag\" aria-label=\"Filtre portrait\"><span>#'
-                        + photographers[i].tags[x] + '</span></a>';
+                        +'\" class=\"tag\" aria-label=\"Filtre ' + photographers[i].tags[x] + '\"><span>#'
+                        +photographers[i].tags[x] + '</span></a>';
                     }
                 } 
                 // Ajout successif des photographes correspondant au filtre
@@ -130,8 +130,8 @@ function listDataFiltre(photographers, filtre) {
                     + photographers[i].id + "\" aria-label=\"Lien page photographe\"><img src=\"Sample_Photos/Photographers_ID_Photos/"
                     + photographers[i].portrait + "\" alt=\"Portrait de " + photographers[i].name + "\" /><h2>"
                     + photographers[i].name + "</h2></a><p class=\"location\">" + photographers[i].city + ", "
-                    + photographers[i].country + "</p><p class=\"tagline\">" + photographers[i].tagline +
-                    "</p><p class=\"price\">" + photographers[i].price + "€/jour</p>" + htmlListTag + "</article>";
+                    + photographers[i].country + "</p><p class=\"tagline\">" + photographers[i].tagline
+                    +"</p><p class=\"price\">" + photographers[i].price + "€/jour</p>" + htmlListTag + "</article>";
                 break;
             }
         }

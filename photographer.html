@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="photographer.css" />
     <script async src="js/fetch.js"></script>
     <script async src="js/photographer.js"></script>
+    <script async src="https://kit.fontawesome.com/23eb318271.js" crossorigin="anonymous"></script>
     <title>FishEye - Profil de votre photographe freelance</title>
 </head>
 
@@ -35,7 +36,19 @@
         <p><img src="Sample_Photos/loading.gif" alt="Chargement de la page photographe" /></p>
         <noscript>Vous devez activer JavaScript pour naviguer sur FishEye.</noscript>
         <section id="info">
-            
+            <!-- Info du photographe -->
+        </section>
+        <div>
+            <span>Trier par</span>
+            <div class="trie" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false">
+                <em class="fas fa-chevron-up"></em>
+                <button class="default" role="listbox" aria-activedescendant="false" aria-selected="true" aria-label="Filtre Popularité">Popularité</button>
+                <button class="option1" role="listbox" aria-activedescendant="false" aria-selected="false" aria-label="Filre Date">Date</button>
+                <button class="option2" role="listbox" aria-activedescendant="false" aria-selected="false" aria-label="Filtre Titre">Titre</button>
+            </div>
+        </div>
+        <section id="media">
+            <!-- Média du photographe -->
         </section>
     </main>
 </body>

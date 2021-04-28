@@ -21,12 +21,17 @@ main {
 main > p {
   position: absolute;
   width: 99%;
+  background: white;
+  height: 100%;
   display: flex;
   justify-content: center;
+  z-index: 2;
+  transition: all 0.4s;
 }
 main > p > img {
   margin-top: 80px;
   width: 180px;
+  height: fit-content;
 }
 main > noscript {
   position: absolute;
@@ -61,10 +66,6 @@ main > section:nth-of-type(1) > div:nth-of-type(1) > h1 {
   font-weight: normal;
   margin-top: 0.5em;
   width: 70%;
-  max-width: 350px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 main > section:nth-of-type(1) > div:nth-of-type(1) > .location {
   color: #901C1C;
@@ -150,6 +151,155 @@ main > section:nth-of-type(1) > p > img:hover, main > section:nth-of-type(1) > p
 main > section:nth-of-type(1) > p > img:hover, main > section:nth-of-type(1) > p > img:focus, main > section:nth-of-type(1) > p > img:active {
   filter: none;
 }
+main > div {
+  display: none;
+  width: 96%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1%;
+  margin-top: 1.5em;
+  margin-bottom: 2em;
+  font-family: "DM Sans";
+  font-weight: 600;
+  font-size: 0.85em;
+}
+main > div > span {
+  margin-right: 1.65em;
+}
+main > div > div {
+  background: #901C1C;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  margin-top: -0.9em;
+  width: 105px;
+  height: auto;
+  border: 7.5px solid #901C1C;
+  border-left: 11px solid #901C1C;
+  border-right: 11px solid #901C1C;
+  border-radius: 3px;
+  z-index: 1;
+  transition: all 0.6s;
+  cursor: pointer;
+}
+main > div > div > em {
+  transform: rotate(180deg);
+  font-size: 0.9em;
+  color: white;
+  transition: all 0.5s;
+  position: absolute;
+  margin-top: 0.9em;
+  margin-right: 0.3em;
+  cursor: pointer;
+}
+main > div > div > button {
+  background: #901C1C;
+  text-align: left;
+  color: white;
+  align-self: end;
+  font-family: "DM Sans";
+  border: none;
+  padding: 11px;
+  font-size: 13px;
+  margin-left: -5px;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+main > div > div > button:nth-of-type(1) {
+  margin-top: -3px;
+  margin-bottom: -4px;
+}
+main > div > div > button:nth-of-type(2) {
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  display: none;
+  width: 108%;
+}
+main > div > div > button:nth-of-type(2):hover, main > div > div > button:nth-of-type(2):focus, main > div > div > button:nth-of-type(2):active {
+  background: #831a1a;
+}
+main > div > div > button:nth-of-type(3) {
+  margin-bottom: -3px;
+  display: none;
+  width: 108%;
+}
+main > div > div > button:nth-of-type(3):hover, main > div > div > button:nth-of-type(3):focus, main > div > div > button:nth-of-type(3):active {
+  background: #831a1a;
+}
+main > section:nth-of-type(2) {
+  opacity: 0;
+  width: 94%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.5em;
+  font-family: "DM Sans";
+  transition: all 0.4s;
+}
+main > section:nth-of-type(2) > article {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: -1.2em;
+  color: #901C1C;
+  width: 286px;
+  margin-left: auto;
+  margin-right: auto;
+}
+main > section:nth-of-type(2) > article > p > img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  object-position: 50% 50%;
+  border-radius: 5px;
+  margin-bottom: -1.6em;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+main > section:nth-of-type(2) > article > p > img:hover, main > section:nth-of-type(2) > article > p > img:focus, main > section:nth-of-type(2) > article > p > img:active {
+  filter: brightness(0.8);
+}
+main > section:nth-of-type(2) > article > .name {
+  font-size: 0.8em;
+  font-weight: 400;
+  flex: auto;
+  width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+main > section:nth-of-type(2) > article > .price {
+  font-size: 0.72em;
+  font-weight: 600;
+  margin-right: 15px;
+}
+main > section:nth-of-type(2) > article > .likes {
+  font-size: 0.8em;
+  font-weight: 600;
+  cursor: pointer;
+}
+main > section:nth-of-type(2) > article > .likes:hover, main > section:nth-of-type(2) > article > .likes:focus, main > section:nth-of-type(2) > article > .likes:active {
+  filter: brightness(0.7);
+}
+main > section:nth-of-type(2) > aside {
+  position: fixed;
+  right: 27px;
+  bottom: 0px;
+  width: 325px;
+  height: 48px;
+  border-radius: 5px 5px 0px 0px;
+  background: #DB8876;
+  font-size: 1.2em;
+  font-family: "DM Sans";
+  font-weight: 600;
+  padding-top: 3px;
+  display: none;
+  align-items: center;
+  justify-content: space-around;
+}
 
 @media screen and (min-width: 768px) {
   main > section:nth-of-type(1) {
@@ -164,7 +314,6 @@ main > section:nth-of-type(1) > p > img:hover, main > section:nth-of-type(1) > p
   }
   main > section:nth-of-type(1) > div:nth-of-type(1) > h1 {
     width: auto;
-    max-width: fit-content;
     margin-right: 50px;
   }
   main > section:nth-of-type(1) > div:nth-of-type(2) {
@@ -183,6 +332,31 @@ main > section:nth-of-type(1) > p > img:hover, main > section:nth-of-type(1) > p
   }
   main > section:nth-of-type(1) > p > img {
     top: 8.5em;
+  }
+  main > div {
+    display: block;
+  }
+  main > div > button {
+    font-size: 14.5px;
+  }
+  main > section:nth-of-type(2) {
+    width: 96%;
+    justify-content: space-around;
+  }
+  main > section:nth-of-type(2) > article {
+    width: 350px;
+    margin-left: initial;
+    margin-right: initial;
+    margin-bottom: -0.7em;
+  }
+  main > section:nth-of-type(2) > article > p > img {
+    height: 300px;
+  }
+  main > section:nth-of-type(2) > article > .name, main > section:nth-of-type(2) > article .price, main > section:nth-of-type(2) > article .likes {
+    font-size: 1.2em;
+  }
+  main > section:nth-of-type(2) > aside {
+    display: flex;
   }
 }
 @media screen and (min-width: 1095px) {
@@ -229,14 +403,48 @@ main > section:nth-of-type(1) > p > img:hover, main > section:nth-of-type(1) > p
     top: 9.85em;
     right: 8%;
   }
+  main > div {
+    width: 93%;
+    font-size: 1.05em;
+  }
+  main > div > div > em {
+    font-size: 0.85em;
+    margin-top: 0.7em;
+  }
+  main > div > div > button {
+    font-size: 14px;
+  }
+  main > section:nth-of-type(2) {
+    width: 93.5%;
+    justify-content: space-between;
+  }
+  main > section:nth-of-type(2) > article {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
 }
 @media screen and (min-width: 2000px) {
   main > section:nth-of-type(1) {
     width: 1300px;
+    padding-bottom: 19px;
   }
   main > section:nth-of-type(1) > p > img {
-    margin-left: 725px;
+    margin-left: 587px;
     position: initial;
+  }
+  main > div {
+    width: 1393px;
+    font-size: 1.2em;
+  }
+  main > div > div > em {
+    font-size: 0.7em;
+    margin-top: 0.8em;
+  }
+  main > div > button {
+    font-size: 15px;
+  }
+  main > section:nth-of-type(2) {
+    width: 1396px;
   }
 }
 

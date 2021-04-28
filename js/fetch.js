@@ -1,15 +1,9 @@
+let urlPage = new URLSearchParams(document.location.href);
+let page = decodeURIComponent(urlPage).split('//')[1].split('/')[1].split('.')[0];
 // Retourne la liste des photographes et la liste des medias dans le fichier data.json
 fetch('data.json')
     .then(response => response.json())
-    .then(listDataPhotographers => { dataPhotographer(listDataPhotographers['photographers'])})
-    .then(listDataMedia => { dataMedia(listDataMedia['media'])})
-
-/**
- * getDataFiltre - Retourne la liste des photographes dans le fichier data.json
- * @param  {String} filtre
- */
-function getDataFiltre(filtre) {
-    fetch('data.json')
-        .then(response => response.json())
-        .then(listData => { listDataFiltre(listData['photographers'], filtre)})
-}
+    .then(data => {
+        if (page === "index") initPhotographer(data['photographers'])
+        else initDataPage(data['photographers'], data['media'])
+    })

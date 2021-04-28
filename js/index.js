@@ -8,62 +8,25 @@ window.addEventListener('scroll', () => {
 })
 
 /**
- * clickNavFiltreTag - renvoi le filtre de navigation demandé a la function getDataFiltre
+ * initPhotographer - initialise la liste des photographes
+ * @param {Array} photographers liste des photographes
+ * @param {String} filtre par défaut false sinnon contien le filtre choisi
  */
-function clickNavFiltreTag() {
-    let navTag = document.querySelector('nav > ul');
-    // Parcours tous les filtres
-    for(let i = 0; i < 8; i++) {
-        let filtreNav = navTag.querySelectorAll('a.tag')[i];
-        filtreNav.addEventListener('click', () => {
-            filtreNav = filtreNav.innerText.toLowerCase().split('#').join('');
-            getDataFiltre(filtreNav);
-        })
-    }
+function initPhotographer(photographers, filtre = false) {
+    let htmlListData;
+    if (!filtre) { htmlListData = initHtmlPhotographer(photographers); }
+    else { htmlListData = initHtmlFiltrePhotographer(photographers, filtre); }
+    clickNavFiltreTag(photographers);
+    displayHtml(htmlListData);
+    clickArticleFiltreTag(photographers);
 }
 
 /**
- * displayListPhotographer - affiche le code html de la liste des photographes
- * @param  {String} htmlListData code html de la liste des photographes
+ * initHtmlPhotographer - stock la liste des photographes
+ * @param {Array} photographers liste des photographes
+ * @return {String} code html de la liste des photographes
  */
-function displayListPhotographer(htmlListData) {
-    document.querySelector('#contenu').innerHTML = htmlListData;
-    // Fermeture du loader et affichage de la liste
-    setTimeout(() => { 
-        document.querySelector('main > p').style.display = "none";
-        document.querySelector('#contenu').style.opacity = 1;
-    }, 1500);
-}
-
-/**
- * clickArticleFiltreTag - renvoi le filtre du photographe demandé a la function getDataFiltre
- */
-function clickArticleFiltreTag() {
-    let section = document.querySelector('section');
-    // Parcours la liste des photographes
-    for(let i = 0; i < 6; i++) {
-        if(section.querySelectorAll('article')[i]) {
-            let article = section.querySelectorAll('article')[i];
-            // Parcours les tags du photographe
-            for(let y = 0; y < 4; y++) {
-                if (article.querySelectorAll('a.tag')[y]) {
-                    let filtreArticle = article.querySelectorAll('a.tag')[y];
-                    filtreArticle.addEventListener('click', () => {
-                        filtreArticle = filtreArticle.innerText.split('#').join('');
-                        getDataFiltre(filtreArticle);
-                    })
-                }
-            }
-        }
-    }
-}
-
-/**
- * dataPhotographer - stock la liste des photographes dans htmlListData
- * @param  {Array} photographers liste des photographes
- */
-function dataPhotographer(photographers) {
- 
+function initHtmlPhotographer(photographers) {
     let htmlListData = "";
     // Parcours la liste des photographes
     for(let i = 0; i < photographers.length; i++) {
@@ -86,18 +49,16 @@ function dataPhotographer(photographers) {
             + photographers[i].tagline + "</p><p class=\"price\">" + photographers[i].price
             + "€/jour</p>" + htmlListTag + "</article>";
     }
-
-    clickNavFiltreTag();
-    displayListPhotographer(htmlListData);
-    clickArticleFiltreTag();
+    return htmlListData;
 }
 
 /**
- * listDataFiltre - stock la liste des photographes en fonction du filtre choisi
+ * initHtmlFiltrePhotographer - stock la liste des photographes en fonction du filtre choisi
  * @param {Array} photographers liste des photographes
  * @param {String} filtre filtre choisi
+ * @return {String} code html de la liste des photographes filtré
  */
-function listDataFiltre(photographers, filtre) {
+function initHtmlFiltrePhotographer(photographers, filtre) {
 
     document.querySelector("header > p > a").style.display = "none";
     document.querySelector("section").style.justifyContent = "space-evenly";
@@ -136,8 +97,58 @@ function listDataFiltre(photographers, filtre) {
             }
         }
     }
-    
-    clickNavFiltreTag();
-    displayListPhotographer(htmlListData);
-    clickArticleFiltreTag();
+    return htmlListData;
+}
+
+/**
+ * clickNavFiltreTag - écoute les filtres de navigation
+ * @return {String} renvoi la liste des photographes et le filtre de navigation cliqué a la function initPhotographer
+ */
+function clickNavFiltreTag(photographers) {
+    let navTag = document.querySelector('nav > ul');
+    // Parcours tous les filtres
+    for(let i = 0; i < 8; i++) {
+        let filtreNav = navTag.querySelectorAll('a.tag')[i];
+        filtreNav.addEventListener('click', () => {
+            filtreNav = filtreNav.innerText.toLowerCase().split('#').join('');
+            initPhotographer(photographers, filtreNav);
+        })
+    }
+}
+
+/**
+ * displayHtml - affiche le code html de la liste des photographes
+ * @param {String} htmlListData code html de la liste des photographes
+ */
+function displayHtml(htmlListData) {
+    document.querySelector('#contenu').innerHTML = htmlListData;
+    // Fermeture du loader et affichage de la liste
+    setTimeout(() => { 
+        document.querySelector('main > p').style.display = "none";
+        document.querySelector('#contenu').style.opacity = 1;
+    }, 2000);
+}
+
+/**
+ * clickArticleFiltreTag - écoute les filtre des photographes
+ * @return {String} renvoi la liste des photographes et le filtre du photographe cliqué a la function initPhotographer
+ */
+function clickArticleFiltreTag(photographers) {
+    let section = document.querySelector('section');
+    // Parcours la liste des photographes
+    for(let i = 0; i < 6; i++) {
+        if(section.querySelectorAll('article')[i]) {
+            let article = section.querySelectorAll('article')[i];
+            // Parcours les tags du photographe
+            for(let y = 0; y < 4; y++) {
+                if (article.querySelectorAll('a.tag')[y]) {
+                    let filtreArticle = article.querySelectorAll('a.tag')[y];
+                    filtreArticle.addEventListener('click', () => {
+                        filtreArticle = filtreArticle.innerText.split('#').join('');
+                        initPhotographer(photographers, filtreArticle);
+                    })
+                }
+            }
+        }
+    }
 }

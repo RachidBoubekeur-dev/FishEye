@@ -1,3 +1,16 @@
+class Media {
+    constructor (id, photographerId, media, alt, tags, likes, date, price) {
+        this.id = id,
+        this.photographerId = photographerId,
+        this.media = media,
+        this.alt = alt,
+        this.tags = tags,
+        this.likes = likes,
+        this.date = date,
+        this.price = price
+    }
+}
+
 let idPhotographe = decodeURIComponent(urlPage).split('?id=')[1];
 
 let divTrie = document.querySelector('.trie');
@@ -35,6 +48,7 @@ let button3 = document.querySelector('.option2');
             button1.ariaLabel = 'Filtre ' + value2;
             option.textContent = value1;
             option.ariaLabel = 'Filtre ' + value1;
+            initMediaTrie(value2);
         });
     });
 });
@@ -46,8 +60,10 @@ let button3 = document.querySelector('.option2');
  */
 function initDataPage(photographers, media) {
     let htmlPhotographer = initHtmlPhotographer(photographers);
-    let htmlMedia = initHtmlMedia(media);
-    displayHtml(htmlPhotographer, htmlMedia);
+    initDataMedia(media);
+    initMediaTrie(filtre = false);
+    let htmlMedia = initHtmlMedia();
+    displayHtml(htmlMedia, htmlPhotographer);
 }
 
 /**
@@ -83,31 +99,55 @@ function initHtmlPhotographer(photographers) {
 }
 
 /**
- * initHtmlMedia - stock les média du photographe
+ * initDataMedia - stock les média du photographe dans le localStorage
  * @param {Array} media liste des média
- * @return {String} code html des média
  */
- function initHtmlMedia(media) {
+ function initDataMedia(media) {
+    let arrayMedia = [];
+    // Parcours la liste des média
+    for (let i = 0; i < media.length; i++) {
+        if(media[i].photographerId == idPhotographe) {
+            arrayMedia.push(new Media(media[i].id, media[i].photographerId, (media[i].image || media[i].video), media[i].alt, media[i].tags, media[i].likes, media[i].date, media[i].price));
+        }
+    }
+    localStorage.setItem('arrayMedia', JSON.stringify(arrayMedia));
+}
+
+/**
+ * initMediaTrie - filtre les média du photographe
+ * @param {String} filtre valeur du filtre
+ */
+ function initMediaTrie(filtre) {
+    let arrayMedia = JSON.parse(localStorage.getItem('arrayMedia'));
+    if (filtre === false || filtre === 'Popularité') arrayMedia.sort((a, b) => b.likes - a.likes);
+    else if (filtre === 'Date') arrayMedia.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    else if (filtre === 'Titre') arrayMedia.sort((a, b) => a.alt.localeCompare(b.alt));
+    localStorage.setItem('arrayMedia', JSON.stringify(arrayMedia));
+    if(filtre) {
+        let htmlMedia = initHtmlMedia();
+        displayHtml(htmlMedia);
+    }
+}
+
+/**
+ * initHtmlMedia - stock les média du photographe
+ * @param {Array} arrayMedia liste des média du photographe
+ * @return {String} code html des média du photographe
+ */
+ function initHtmlMedia() {
     let totalLikes = 0;
     let htmlMedia = "";
-    // Parcours la liste des média
-    for(let i = 0; i < media.length; i++) {
-        if(media[i].photographerId == idPhotographe) {
-            totalLikes += media[i].likes;
-            if (media[i].image) {
-                localStorage.setItem('Image', media[i].image);
-                localStorage.setItem('NameImage', media[i].image.split('.')[0].split('_').join(' '));
-            } else {
-                localStorage.setItem('Image', media[i].video.replace('mp4', 'webp'));
-                localStorage.setItem('NameImage', media[i].video.split('.')[0].split('_').join(' '));
-            }
-            // Ajout successif des média du photographe
-            htmlMedia += "<article role=\"document\"><p><img src=\"Sample_Photos/" + localStorage.getItem('Name')
-                + "/" + localStorage.getItem('Image') + "\" alt=\"" + localStorage.getItem('NameImage')
-                + ", close-up view\" tabindex=\"0\" /></p><p class=\"name\" title=\"" + localStorage.getItem('NameImage') + "\">" + localStorage.getItem('NameImage')
-                + "</p><p class=\"price\">" + media[i].price + " €</p><p class=\"likes\" tabindex=\"0\" aria-label=\"Nombre de like\">"
-                + media[i].likes + " <em class=\"fas fa-heart\"></em></p></article>";
-        }
+    let arrayMedia = JSON.parse(localStorage.getItem('arrayMedia'));
+    // Parcours la liste des média du photographe
+    for(let i = 0; i < arrayMedia.length; i++) {
+        let srcMedia = localStorage.getItem('Name') + "/" + arrayMedia[i].media.replace('mp4', 'webp');
+        let nameImage = arrayMedia[i].alt.split(',')[0];
+        totalLikes += arrayMedia[i].likes;
+        // Ajout successif des média du photographe
+        htmlMedia += "<article role=\"document\"><p><img src=\"Sample_Photos/" + srcMedia + "\" alt=\"" + arrayMedia[i].alt
+            + "\" tabindex=\"0\" /></p><p class=\"name\" title=\"" + nameImage + "\">" + nameImage
+            + "</p><p class=\"price\">" + arrayMedia[i].price + " €</p><p class=\"likes\" tabindex=\"0\" aria-label=\"Nombre de like\">"
+            + arrayMedia[i].likes + " <em class=\"fas fa-heart\"></em></p></article>";
     }
     htmlMedia += "<aside role=\"complementary\"><p class=\"totalLikes\">" + totalLikes + " <em class=\"fas fa-heart\"></em></p><p>" + localStorage.getItem('Price') + "€ / jour</p></aside>";
     return htmlMedia;
@@ -115,14 +155,14 @@ function initHtmlPhotographer(photographers) {
 
 /**
  * displayHtml - affiche le code html
- * @param  {String} htmlPhotographer code html du photographe
  * @param  {String} htmlMedia code html des média du photographe
+ * @param  {String} htmlPhotographer code html du photographe 
  */
-function displayHtml(htmlPhotographer, htmlMedia) {
-    document.querySelector('#info').innerHTML = htmlPhotographer;
+function displayHtml(htmlMedia, htmlPhotographer = false) {
     document.querySelector('#media').innerHTML = htmlMedia;
+    if (htmlPhotographer) document.querySelector('#info').innerHTML = htmlPhotographer;
     // Fermeture du loader et affichage du code html
-    setTimeout(() => {
+    setTimeout(() => {htmlPhotographer
         document.querySelector('main > p').style.display = "none";
         document.querySelector('#info').style.opacity = 1;
         document.querySelector('#media').style.opacity = 1;

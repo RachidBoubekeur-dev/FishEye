@@ -1,5 +1,5 @@
 class Media {
-    constructor(id, photographerId, media, alt, tags, likes, date, price) {
+    constructor(id, photographerId, media, alt, tags, likes, date, price, likeDefault) {
         this.id = id,
             this.photographerId = photographerId,
             this.media = media,
@@ -7,7 +7,8 @@ class Media {
             this.tags = tags,
             this.likes = likes,
             this.date = date,
-            this.price = price
+            this.price = price,
+            this.likeDefault = likeDefault
     }
 }
 
@@ -64,6 +65,7 @@ function initDataPage(photographers, media) {
     let htmlMedia = initHtmlMedia();
     displayHtml(htmlMedia, htmlPhotographer);
     clickFiltreTag();
+    clickLikeMedia();
 }
 
 /**
@@ -106,7 +108,7 @@ function initDataMedia(media) {
     // Parcours la liste des média
     for (let i = 0; i < media.length; i++) {
         if (media[i].photographerId == idPhotographe) {
-            arrayMedia.push(new Media(media[i].id, media[i].photographerId, (media[i].image || media[i].video), media[i].alt, media[i].tags, media[i].likes, media[i].date, media[i].price));
+            arrayMedia.push(new Media(media[i].id, media[i].photographerId, (media[i].image || media[i].video), media[i].alt, media[i].tags, media[i].likes, media[i].date, media[i].price, media[i].likes));
         }
     }
     localStorage.setItem('arrayMedia', JSON.stringify(arrayMedia));
@@ -125,6 +127,7 @@ function initMediaTrie(filtre) {
     if (filtre) {
         let htmlMedia = initHtmlMedia();
         displayHtml(htmlMedia);
+        clickLikeMedia(JSON.stringify(arrayMedia));
     }
 }
 
@@ -227,5 +230,33 @@ function clickFiltreTag() {
                 });
             });
         }
+    }
+}
+
+/**
+ * clickLikeMedia - incrémente ou décrémente 1 like du média liker
+ * @param {Array} arrayMedia liste des média du photographe
+ */
+function clickLikeMedia(arrayMedia = false) {
+    if (arrayMedia) arrayMedia = JSON.parse(arrayMedia);
+    else arrayMedia = JSON.parse(localStorage.getItem('arrayMedia'));
+    for (let i = 0; i < arrayMedia.length; i++) {
+        let = sectionMedia = document.querySelector('#media');
+        let like = sectionMedia.querySelectorAll('article > p.likes')[i];
+        ['click', 'keypress'].forEach(element => {
+            like.addEventListener(element, () => {
+                let totalLikes = sectionMedia.querySelector('aside > p.totalLikes');
+                if (arrayMedia[i].likeDefault === parseInt(like.textContent)) {
+                    like.innerHTML = parseInt(like.textContent) + 1 + " <em class=\"fas fa-heart\" aria-hidden=\"true\"></em>";
+                    totalLikes.innerHTML = parseInt(totalLikes.textContent) + 1 + " <em class=\"fas fa-heart\" aria-hidden=\"true\"></em>";
+                }
+                else {
+                    like.innerHTML = parseInt(like.textContent) - 1 + " <em class=\"fas fa-heart\" aria-hidden=\"true\"></em>";
+                    totalLikes.innerHTML = parseInt(totalLikes.textContent) - 1 + " <em class=\"fas fa-heart\" aria-hidden=\"true\"></em>";
+                }
+                arrayMedia[i].likes = parseInt(like.textContent);
+                localStorage.setItem('arrayMedia', JSON.stringify(arrayMedia));
+            });
+        });
     }
 }

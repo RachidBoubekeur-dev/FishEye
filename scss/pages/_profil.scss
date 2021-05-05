@@ -83,7 +83,7 @@ main {
             }
         }
     }
-    & > div {
+    & > #divTrie {
         display: none;
         width: 96%;
         margin-left: auto;
@@ -233,6 +233,90 @@ main {
             justify-content: space-around;
         }
     }
+    & > #lightbox {
+        width: 100%;
+        height: 100%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: #ffffffb8;
+        opacity: 0;
+        z-index: 3;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        transition: all 0.5s;
+        & > div {
+            width: 96%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            border-radius: 5px;
+            background: white;
+            & > .closeLightbox {
+                color: $color1;
+                cursor: pointer;
+                transition: all 0.5s;
+                font-size: 1.7em;
+                align-self: flex-end;
+                margin-right: 2.5%;
+                margin-bottom: -40px;
+                margin-top: 18px;
+                &:hover {
+                    color: $color2;
+                }
+            }
+            & > .previousLightbox {
+                color: $color1;
+                font-size: 1.7em;
+                position: absolute;
+                left: 3.5%;
+                cursor: pointer;
+                transform: rotate(270deg);
+                transition: all 0.5s;
+                &:hover {
+                    color: $color2;
+                }
+            }
+            & > .nextLightbox {
+                color: $color1;
+                font-size: 1.7em;
+                position: absolute;
+                right: 3.5%;
+                cursor: pointer;
+                transform: rotate(-270deg);
+                transition: all 0.5s;
+                &:hover {
+                    color: $color2;
+                }
+            }
+            & > #pMedia > .media {
+                max-width: 76%;
+                max-height: 708px;
+                border-radius: 5px;
+            }
+            & > #pMedia > .mediaVideo {
+                display: none;
+                max-width: 76%;
+                max-height: 708px;
+                border-radius: 5px;
+            }
+            & > .nameMedia {
+                color: $color1;
+                font-size: 1.15em;
+                font-family: $police1;
+                font-weight: 500;
+                text-align: left;
+                width: 86%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                margin-top: 0em;
+            }
+        }
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -268,7 +352,7 @@ main {
                 top: 8.5em;
             }
         }
-        & > div {
+        & > #divTrie {
             display: block;
             & > button {
                 font-size: 14.5px;
@@ -291,6 +375,31 @@ main {
             }
             & > aside {
                 display: flex;
+            }
+        }
+        & > #lightbox {
+            & > div {
+                & > .closeLightbox {
+                    font-size: 2em;
+                    right: 3%;
+                }
+                & > .previousLightbox {
+                    font-size: 2em;
+                    left: 4%;
+                }
+                & > .nextLightbox {
+                    font-size: 2em;
+                    right: 4%;
+                }
+                & > #pMedia > .media {
+                    max-width: 76%;
+                    max-height: 720px;
+                }
+                & > #pMedia > .mediaVideo {
+                    display: none;
+                    max-width: 76%;
+                    max-height: 720px;
+                }
             }
         }
     }
@@ -343,7 +452,7 @@ main {
                 right: 8%;
             }
         }
-        & > div {
+        & > #divTrie {
             width: 93%;
             font-size: 1.05em;
             & > div {
@@ -364,6 +473,32 @@ main {
                 margin-right: 1em;
             }
         }
+        & > #lightbox {
+            & > div {
+                width: 1056px;
+                & > .closeLightbox {
+                    margin-left: 989px;
+                    right: initial;
+                }
+                & > .previousLightbox {
+                    margin-right: 989px;
+                    left: initial;
+                }
+                & > .nextLightbox {
+                    margin-left: 989px;
+                    right: initial;
+                }
+                & > #pMedia > .media {
+                    max-width: 910px;
+                    max-height: 550px;
+                }
+                & > #pMedia > .mediaVideo {
+                    display: none;
+                    max-width: 910px;
+                    max-height: 550px;
+                }
+            }
+        }
     }
 }
 
@@ -377,7 +512,7 @@ main {
                 position: initial;
             }
         }
-        & > div {
+        & > #divTrie {
             width: 1393px;
             font-size: 1.2em;
             & > div > em {

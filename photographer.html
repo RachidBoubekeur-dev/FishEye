@@ -21,7 +21,7 @@
     <meta name="twitter:image" content="Sample_Photos/logo.webp">
     <link rel="icon" type="image/png" href="Sample_Photos/favicon.webp">
     <link rel="stylesheet" href="photographer.css" />
-    <script async src="js/fetch.js"></script>
+    <script async src="js/index.js"></script>
     <script async src="js/photographer.js"></script>
     <script async src="https://kit.fontawesome.com/23eb318271.js" crossorigin="anonymous"></script>
     <title>FishEye - Profil de votre photographe freelance</title>
@@ -38,7 +38,7 @@
         <section id="info">
             <!-- Info du photographe -->
         </section>
-        <div>
+        <div id="divTrie">
             <span>Trier par</span>
             <div class="trie" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false">
                 <em class="fas fa-chevron-up"></em>
@@ -50,6 +50,21 @@
         <section id="media">
             <!-- Média du photographe -->
         </section>
+        <div id="lightbox" role="dialog">
+            <div aria-label="image closeup view">
+                <em class="fas fa-times closeLightbox" aria-hidden="true" tabindex="0" aria-label="Close dialog"></em>
+                <em class="fas fa-chevron-up previousLightbox" aria-hidden="true" tabindex="0" aria-label="Previous image"></em>
+                <em class="fas fa-chevron-up nextLightbox" aria-hidden="true" tabindex="0" aria-label="Next image"></em>
+                <p id="pMedia" class="0">
+                    <img class="media" src="" alt="">
+                    <video class="mediaVideo" controls src="" poster="">
+                        Votre navigateur ne prend pas en charge les vidéos mp4.
+                        Mais vous pouvez toujours <a href="">la télécharger</a> !
+                    </video>
+                </p>
+                <p class="nameMedia"></p>
+            </div>
+        </div>
     </main>
 </body>
 

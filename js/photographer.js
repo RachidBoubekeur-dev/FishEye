@@ -17,6 +17,8 @@ let divTrie = document.querySelector('.trie');
 let button1 = document.querySelector('.default');
 let button2 = document.querySelector('.option1');
 let button3 = document.querySelector('.option2');
+let sectionMedia = document.querySelector('#media');
+let lightbox = document.querySelector('#lightbox');
 
 ['click', 'keypress'].forEach(element => {
     divTrie.addEventListener(element, () => {
@@ -39,15 +41,14 @@ let button3 = document.querySelector('.option2');
 });
 
 [button2, button3].forEach(selector => {
-    let option = selector;
     ['click', 'keypress'].forEach(element => {
-        option.addEventListener(element, () => {
+        selector.addEventListener(element, () => {
             let value1 = button1.textContent;
-            let value2 = option.textContent;
+            let value2 = selector.textContent;
             button1.textContent = value2;
             button1.ariaLabel = 'Filtre ' + value2;
-            option.textContent = value1;
-            option.ariaLabel = 'Filtre ' + value1;
+            selector.textContent = value1;
+            selector.ariaLabel = 'Filtre ' + value1;
             initMediaTrie(value2);
         });
     });
@@ -64,8 +65,10 @@ function initDataPage(photographers, media) {
     initMediaTrie(filtre = false);
     let htmlMedia = initHtmlMedia();
     displayHtml(htmlMedia, htmlPhotographer);
-    clickFiltreTag();
-    clickLikeMedia();
+    handleFiltreTag();
+    handleLikeMedia();
+    handleModalMedia();
+    handleModalButton();
 }
 
 /**
@@ -91,7 +94,7 @@ function initHtmlPhotographer(photographers) {
             htmlPhotographer = "<div id=\"contentinfo\" role=\"contentinfo\"><h1 title=\"" + photographers[i].name + "\">" + photographers[i].name
                 + "</h1><p class=\"location\">" + photographers[i].city
                 + ", " + photographers[i].country + "</p><p class=\"tagline\">" + photographers[i].tagline + "</p>" + htmlListTag + "</div><div><button id=\"contact\" aria-pressed=\"false\" aria-label=\"Button de contact\">Contactez-moi</button></div><p><img src=\"Sample_Photos/Photographers_ID_Photos/"
-                + photographers[i].portrait + "\" alt=\"Portrait de " + photographers[i].name + "\"></p>";
+                + photographers[i].portrait + "\" alt=\"Portrait de " + photographers[i].name + "\"  ></p>";
             break;
         }
     }
@@ -127,7 +130,14 @@ function initMediaTrie(filtre) {
     if (filtre) {
         let htmlMedia = initHtmlMedia();
         displayHtml(htmlMedia);
-        clickLikeMedia(JSON.stringify(arrayMedia));
+        handleLikeMedia(JSON.stringify(arrayMedia));
+        handleModalMedia(JSON.stringify(arrayMedia));
+        for (let i = 0; i < 4; i++) {
+            if (document.querySelector('#contentinfo').querySelectorAll('a.tag')[i]) {
+                document.querySelector('#contentinfo').querySelectorAll('a.tag')[i].style.color = "#901C1C";
+                document.querySelector('#contentinfo').querySelectorAll('a.tag')[i].style.background = "none";
+            }
+        }
     }
 }
 
@@ -136,17 +146,20 @@ function initMediaTrie(filtre) {
  * @param {Array} arrayMedia liste des média du photographe
  * @return {String} code html des média du photographe
  */
-function initHtmlMedia() {
+function initHtmlMedia(filtreTag = false) {
     let totalLikes = 0;
     let htmlMedia = "";
-    let arrayMedia = JSON.parse(localStorage.getItem('arrayMedia'));
+    let arrayMedia;
+    if (!filtreTag) arrayMedia = JSON.parse(localStorage.getItem('arrayMedia'));
+    else arrayMedia = filtreTag;
     // Parcours la liste des média du photographe
     for (let i = 0; i < arrayMedia.length; i++) {
+        let typeMedia = arrayMedia[i].media.split('.')[1];
         let srcMedia = localStorage.getItem('Name') + "/" + arrayMedia[i].media.replace('mp4', 'webp');
         let nameImage = arrayMedia[i].alt.split(',')[0];
         totalLikes += arrayMedia[i].likes;
         // Ajout successif des média du photographe
-        htmlMedia += "<article class=\"" + arrayMedia[i].tags[0] + "\" role=\"document\"><p><img src=\"Sample_Photos/" + srcMedia + "\" alt=\"" + arrayMedia[i].alt
+        htmlMedia += "<article class=\"" + arrayMedia[i].id + "\" role=\"document\"><p><img class=\"" + typeMedia + "\" src=\"Sample_Photos/" + srcMedia + "\" alt=\"" + arrayMedia[i].alt
             + "\" tabindex=\"0\" /></p><p class=\"name\" title=\"" + nameImage + "\">" + nameImage
             + "</p><p class=\"price\">" + arrayMedia[i].price + " €</p><p class=\"likes\" tabindex=\"0\" aria-label=\"Nombre de like\">"
             + arrayMedia[i].likes + " <em class=\"fas fa-heart\"></em></p></article>";
@@ -163,12 +176,6 @@ function initHtmlMedia() {
 function displayHtml(htmlMedia, htmlPhotographer = false) {
     document.querySelector('#media').innerHTML = htmlMedia;
     if (htmlPhotographer) document.querySelector('#info').innerHTML = htmlPhotographer;
-    for (let y = 0; y < 4; y++) {
-        if (document.querySelector('#contentinfo').querySelectorAll('a.tag')[y]) {
-            document.querySelector('#contentinfo').querySelectorAll('a.tag')[y].style.color = "#901C1C";
-            document.querySelector('#contentinfo').querySelectorAll('a.tag')[y].style.background = "none";
-        }
-    }
     // Fermeture du loader et affichage du code html
     setTimeout(() => {
         htmlPhotographer
@@ -179,53 +186,40 @@ function displayHtml(htmlMedia, htmlPhotographer = false) {
 }
 
 /**
- * clickFiltreTag - filtre les média du photographe en fonction du tag activé 
+ * handleFiltreTag - filtre les média du photographe en fonction du tag activé 
  */
-function clickFiltreTag() {
+function handleFiltreTag() {
     let listTag = document.querySelector('#contentinfo');
-    let arrayTag = [];
     // Parcours les tags du photographe
     for (let i = 0; i < 4; i++) {
         if (listTag.querySelectorAll('a.tag')[i]) {
             let tag = listTag.querySelectorAll('a.tag')[i];
-            arrayTag.push(tag.textContent.split('#')[1]);
             ['click', 'keypress'].forEach(element => {
                 tag.addEventListener(element, () => {
-                    let sectionMedia = document.querySelector('#media');
                     let arrayMedia = JSON.parse(localStorage.getItem('arrayMedia'));
                     // Si le même tag n'est pas déjà activé
                     if (listTag.querySelectorAll('a.tag')[i].style.color !== "white") {
                         for (let y = 0; y < 4; y++) {
-                            if (listTag.querySelectorAll('a.tag')[y]) {
+                            if (listTag.querySelectorAll('a.tag')[y] && y !== i) {
                                 listTag.querySelectorAll('a.tag')[y].style.color = "#901C1C";
                                 listTag.querySelectorAll('a.tag')[y].style.background = "none";
                             }
                         }
                         listTag.querySelectorAll('a.tag')[i].style.color = "white";
                         listTag.querySelectorAll('a.tag')[i].style.background = "#901C1C";
-                        for (let y = 0; y < arrayMedia.length; y++) {
-                            sectionMedia.querySelectorAll('article')[y].style.display = "flex";
-                            if (arrayMedia[y].tags[0] !== tag.textContent.split('#')[1]) {
-                                for (let x = 0; x < arrayMedia.length; x++) {
-                                    if (sectionMedia.querySelectorAll('article.' + arrayMedia[y].tags[0])[x]) {
-                                        sectionMedia.querySelectorAll('article.' + arrayMedia[y].tags[0])[x].style.display = "none";
-                                    }
-                                }
-                            }
-                        }
+                        let isFiltreTag = ({tags}) => tags[0] === tag.textContent.split('#')[1];
+                        let arrayMediaFiltreTag = arrayMedia.filter(isFiltreTag);
+                        let htmlMedia = initHtmlMedia(arrayMediaFiltreTag);
+                        displayHtml(htmlMedia);
+                        handleLikeMedia(JSON.stringify(arrayMediaFiltreTag), filtreTag = true);
+                        handleModalMedia(JSON.stringify(arrayMediaFiltreTag));
                     } else {
                         listTag.querySelectorAll('a.tag')[i].style.color = "#901C1C";
                         listTag.querySelectorAll('a.tag')[i].style.background = "none";
-                        for (let y = 0; y < arrayMedia.length; y++) {
-                            sectionMedia.querySelectorAll('article')[y].style.display = "flex";
-                            if (arrayMedia[y].tags[0] !== tag.textContent.split('#')[1]) {
-                                for (let x = 0; x < arrayMedia.length; x++) {
-                                    if (sectionMedia.querySelectorAll('article.' + arrayMedia[y].tags[0])[x]) {
-                                        sectionMedia.querySelectorAll('article.' + arrayMedia[y].tags[0])[x].style.display = "flex";
-                                    }
-                                }
-                            }
-                        }
+                        let htmlMedia = initHtmlMedia(arrayMedia);
+                        displayHtml(htmlMedia);
+                        handleLikeMedia(JSON.stringify(arrayMedia));
+                        handleModalMedia(JSON.stringify(arrayMedia));
                     }
                 });
             });
@@ -234,29 +228,201 @@ function clickFiltreTag() {
 }
 
 /**
- * clickLikeMedia - incrémente ou décrémente 1 like du média liker
+ * handleLikeMedia - incrémente ou décrémente 1 like du média liker
  * @param {Array} arrayMedia liste des média du photographe
  */
-function clickLikeMedia(arrayMedia = false) {
+function handleLikeMedia(arrayMedia = false, filtreTag = false) {
     if (arrayMedia) arrayMedia = JSON.parse(arrayMedia);
     else arrayMedia = JSON.parse(localStorage.getItem('arrayMedia'));
     for (let i = 0; i < arrayMedia.length; i++) {
-        let = sectionMedia = document.querySelector('#media');
         let like = sectionMedia.querySelectorAll('article > p.likes')[i];
         ['click', 'keypress'].forEach(element => {
             like.addEventListener(element, () => {
                 let totalLikes = sectionMedia.querySelector('aside > p.totalLikes');
                 if (arrayMedia[i].likeDefault === parseInt(like.textContent)) {
-                    like.innerHTML = parseInt(like.textContent) + 1 + " <em class=\"fas fa-heart\" aria-hidden=\"true\"></em>";
-                    totalLikes.innerHTML = parseInt(totalLikes.textContent) + 1 + " <em class=\"fas fa-heart\" aria-hidden=\"true\"></em>";
+                    like.innerHTML = (parseInt(like.textContent) + 1) + " <em class=\"fas fa-heart\" aria-hidden=\"true\"></em>";
+                    totalLikes.innerHTML = (parseInt(totalLikes.textContent) + 1) + " <em class=\"fas fa-heart\" aria-hidden=\"true\"></em>";
                 }
-                else {
-                    like.innerHTML = parseInt(like.textContent) - 1 + " <em class=\"fas fa-heart\" aria-hidden=\"true\"></em>";
-                    totalLikes.innerHTML = parseInt(totalLikes.textContent) - 1 + " <em class=\"fas fa-heart\" aria-hidden=\"true\"></em>";
+                else if (arrayMedia[i].likeDefault === (parseInt(like.textContent) - 1)) {
+                    like.innerHTML = (parseInt(like.textContent) - 1) + " <em class=\"fas fa-heart\" aria-hidden=\"true\"></em>";
+                    totalLikes.innerHTML = (parseInt(totalLikes.textContent) - 1) + " <em class=\"fas fa-heart\" aria-hidden=\"true\"></em>";
                 }
-                arrayMedia[i].likes = parseInt(like.textContent);
-                localStorage.setItem('arrayMedia', JSON.stringify(arrayMedia));
+                if (filtreTag) {
+                    let idMedia = parseInt(sectionMedia.querySelector('article').className);
+                    let origineArrayMedia = JSON.parse(localStorage.getItem('arrayMedia'));
+                    let positionMedia;
+                    for (let y = 0; y < origineArrayMedia.length; y++) {
+                        if (origineArrayMedia[y].id === idMedia) {
+                            positionMedia = y;
+                            break;
+                        }
+                    }
+                    origineArrayMedia[positionMedia].likes = parseInt(like.textContent);
+                    localStorage.setItem('arrayMedia', JSON.stringify(origineArrayMedia));
+                } else {
+                    arrayMedia[i].likes = parseInt(like.textContent);
+                    localStorage.setItem('arrayMedia', JSON.stringify(arrayMedia));
+                }
             });
         });
     }
+}
+
+/**
+ * handleModalMedia - écoute les articles au click ouvre la lithbox
+ * @param {Array} arrayMedia liste des média du photographe
+ */
+function handleModalMedia(arrayMedia = false) {
+    if (arrayMedia) arrayMedia = JSON.parse(arrayMedia);
+    else arrayMedia = JSON.parse(localStorage.getItem('arrayMedia'));
+    for (let i = 0; i < arrayMedia.length; i++) {
+        let media = sectionMedia.querySelectorAll('article > p > img')[i];
+        let typeMedia = media.className;
+        let nameMedia = sectionMedia.querySelectorAll('article > p.name')[i].textContent;
+        ['click', 'keypress'].forEach(element => {
+            media.addEventListener(element, () => {
+                lightbox.style.display = "flex";
+                setTimeout(() => { lightbox.style.opacity = 1; }, 500);
+                document.querySelector('#pMedia').className = i;
+                if (typeMedia === "mp4") {
+                    document.querySelector('.media').style.display = "none";
+                    document.querySelector('.mediaVideo').style.display = "initial";
+                    document.querySelector('.mediaVideo').src = media.src.replace('webp', 'mp4');
+                    document.querySelector('.mediaVideo > a').href = media.src.replace('webp', 'mp4');
+                    document.querySelector('.mediaVideo').poster = media.src;
+                } else {
+                    document.querySelector('.mediaVideo').style.display = "none";
+                    document.querySelector('.media').style.display = "initial";
+                    document.querySelector('.media').src = media.src;
+                    document.querySelector('.media').alt = nameMedia;
+                }
+                document.querySelector('.nameMedia').textContent = nameMedia;
+            });
+        });
+    }
+}
+
+/**
+ * handleModalButton - écoute les buttons de la lithbox
+ */
+function handleModalButton() {
+    arrayMedia = JSON.parse(localStorage.getItem('arrayMedia'));
+    let closeLightbox = document.querySelector('.closeLightbox');
+    let nextLightbox = document.querySelector('.nextLightbox');
+    let previousLightbox = document.querySelector('.previousLightbox');
+    // Au click souris ou entrée
+    [nextLightbox, previousLightbox].forEach(selector => {
+        ['click', 'keypress'].forEach(element => {
+            closeLightbox.addEventListener(element, () => {
+                document.querySelector('#pMedia').className = 0;
+                lightbox.style.opacity = 0;
+                setTimeout(() => { lightbox.style.display = "none"; }, 500);
+            });
+            selector.addEventListener(element, () => {
+                let articleMediaMax;
+                for (let i = 0; i < arrayMedia.length; i++) {
+                    if(!sectionMedia.querySelectorAll('article')[i]){
+                        articleMediaMax = i - 1;
+                        break;
+                    } else {
+                        articleMediaMax = 9;
+                    }
+                }
+                let numberMedia = parseInt(document.querySelector('#pMedia').className);
+                for (let i = 0; i < arrayMedia.length; i++) {
+                    if (selector === nextLightbox) {
+                        if (!sectionMedia.querySelectorAll('article')[numberMedia + 1]) {
+                            numberMedia = 0;
+                            break;
+                        } else {
+                            numberMedia += 1;
+                            break;
+                        }
+                    } else if (selector === previousLightbox) {
+                        if (!sectionMedia.querySelectorAll('article')[numberMedia - 1]) {
+                            numberMedia = articleMediaMax;
+                            break;
+                        } else {
+                            numberMedia -= 1;
+                            break;
+                        }
+                    }
+                }
+
+                let media = sectionMedia.querySelectorAll('article > p > img')[numberMedia];
+                let mediaName = sectionMedia.querySelectorAll('article > p.name')[numberMedia].textContent;
+                let typeMedia = media.className;
+                if (typeMedia === "mp4") {
+                    document.querySelector('.media').style.display = "none";
+                    document.querySelector('.mediaVideo').style.display = "initial";
+                    document.querySelector('.mediaVideo').src = media.src.replace('webp', 'mp4');
+                    document.querySelector('.mediaVideo > a').href = media.src.replace('webp', 'mp4');
+                    document.querySelector('.mediaVideo').poster = media.src;
+                } else {
+                    document.querySelector('.mediaVideo').style.display = "none";
+                    document.querySelector('.media').style.display = "initial";
+                    document.querySelector('.media').src = media.src;
+                    document.querySelector('.media').alt = mediaName;
+                    document.querySelector('.nameMedia').textContent = mediaName;
+                }
+                document.querySelector('#pMedia').className = numberMedia;
+            });
+        });
+    });
+    // Pour les touches echap, arrow left/right
+    window.addEventListener('keyup', (event) => {
+        if (event.key === 'Escape') {
+            document.querySelector('#pMedia').className = 0;
+            lightbox.style.opacity = 0;
+            setTimeout(() => { lightbox.style.display = "none"; }, 500);
+        } else if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+            let articleMediaMax;
+            for (let i = 0; i < arrayMedia.length; i++) {
+                if(!sectionMedia.querySelectorAll('article')[i]){
+                    articleMediaMax = i - 1;
+                    break;
+                } else {
+                    articleMediaMax = 9;
+                }
+            }
+            let numberMedia = parseInt(document.querySelector('#pMedia').className);
+            for (let i = 0; i < arrayMedia.length; i++) {
+                if (event.key === 'ArrowRight') {
+                    if (!sectionMedia.querySelectorAll('article')[numberMedia + 1]) {
+                        numberMedia = 0;
+                        break;
+                    } else {
+                        numberMedia += 1;
+                        break;
+                    }
+                }
+                else if (event.key === 'ArrowLeft') {
+                    if (!sectionMedia.querySelectorAll('article')[numberMedia - 1]) {
+                        numberMedia = articleMediaMax;
+                        break;
+                    } else {
+                        numberMedia -= 1;
+                        break;
+                    }
+                }
+            }
+            let media = sectionMedia.querySelectorAll('article > p > img')[numberMedia];
+            let mediaName = sectionMedia.querySelectorAll('article > p.name')[numberMedia].textContent;
+            let typeMedia = media.className;
+            if (typeMedia === "mp4") {
+                document.querySelector('.media').style.display = "none";
+                document.querySelector('.mediaVideo').style.display = "initial";
+                document.querySelector('.mediaVideo').src = media.src.replace('webp', 'mp4');
+                document.querySelector('.mediaVideo > a').href = media.src.replace('webp', 'mp4');
+                document.querySelector('.mediaVideo').poster = media.src;
+            } else {
+                document.querySelector('.mediaVideo').style.display = "none";
+                document.querySelector('.media').style.display = "initial";
+                document.querySelector('.media').src = media.src;
+                document.querySelector('.media').alt = mediaName;
+                document.querySelector('.nameMedia').textContent = mediaName;
+            }
+            document.querySelector('#pMedia').className = numberMedia;
+        }
+    });
 }

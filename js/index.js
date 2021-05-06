@@ -4,6 +4,6 @@ let page = decodeURIComponent(urlPage).split('https://rachidboubekeur-dev.github
 fetch('data.json')
     .then(response => response.json())
     .then(data => {
-        if (page === "index.html=") initPhotographer(data['photographers'])
+        if (page === "index") initPhotographer(data['photographers'])
         else initDataPage(data['photographers'], data['media'])
     })

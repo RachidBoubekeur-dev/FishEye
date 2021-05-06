@@ -1,6 +1,5 @@
 let urlPage = new URLSearchParams(document.location.href);
 let page = decodeURIComponent(urlPage).split('https://rachidboubekeur-dev.github.io/RachidBoubekeur_DA6_12042021/')[1];
-alert(page);
 // Retourne la liste des photographes et la liste des medias dans le fichier data.json
 fetch('data.json')
     .then(response => response.json())

@@ -65,6 +65,7 @@ function initDataPage(photographers, media) {
     initMediaTrie(filtre = false);
     let htmlMedia = initHtmlMedia();
     displayHtml(htmlMedia, htmlPhotographer);
+    handleModalForm();
     handleFiltreTag();
     handleLikeMedia();
     handleModalMedia();
@@ -82,7 +83,7 @@ function initHtmlPhotographer(photographers) {
     for (let i = 0; i < photographers.length; i++) {
         if (photographers[i].id == idPhotographe) {
             localStorage.clear();
-            localStorage.setItem('Name', photographers[i].name.split(' ')[0].split('-').join('_'));
+            localStorage.setItem('Name', photographers[i].name);
             localStorage.setItem('Price', photographers[i].price);
             let htmlListTag = "";
             for (let y = 0; y < photographers[i].tags.length; y++) {
@@ -155,7 +156,7 @@ function initHtmlMedia(filtreTag = false) {
     // Parcours la liste des média du photographe
     for (let i = 0; i < arrayMedia.length; i++) {
         let typeMedia = arrayMedia[i].media.split('.')[1];
-        let srcMedia = localStorage.getItem('Name') + "/" + arrayMedia[i].media.replace('mp4', 'webp');
+        let srcMedia = localStorage.getItem('Name').split(' ')[0].split('-').join('_') + "/" + arrayMedia[i].media.replace('mp4', 'webp');
         let nameImage = arrayMedia[i].alt.split(',')[0];
         totalLikes += arrayMedia[i].likes;
         // Ajout successif des média du photographe
@@ -183,6 +184,56 @@ function displayHtml(htmlMedia, htmlPhotographer = false) {
         document.querySelector('#info').style.opacity = 1;
         document.querySelector('#media').style.opacity = 1;
     }, 2000);
+}
+
+/**
+ * handleModalForm - ouvre ou ferme la modal form contact
+ */
+function handleModalForm() {
+    let contact = document.querySelector('#contact');
+    let formBox = document.querySelector('#formBox');
+    let closeFormBox = document.querySelector('.closeFormBox');
+    document.querySelector('#formBox > div').ariaLabel += " " + localStorage.getItem('Name');
+    document.querySelector('#formBox > div > h1').textContent += " " + localStorage.getItem('Name');
+    ['click', 'keypress'].forEach(element => {
+        contact.addEventListener(element, () => {
+            formBox.style.display = "flex";
+            setTimeout(() => { formBox.style.opacity = 1; }, 500);
+            handleDataForm();
+        });
+        closeFormBox.addEventListener(element, () => {
+            formBox.style.opacity = 0;
+            setTimeout(() => { formBox.style.display = "none"; }, 500);
+        });
+    });
+    window.addEventListener('keyup', (event) => {
+        if (event.key === 'Escape') {
+            formBox.style.opacity = 0;
+            setTimeout(() => { formBox.style.display = "none"; }, 500);
+        }
+    });
+}
+
+/**
+ * handleDataForm - submit formulaire contact
+ */
+function handleDataForm() {
+    const formContact = document.querySelector('form');
+    const inputFirst = document.querySelector('#prénom');
+    const inputName = document.querySelector('#nom');
+    const inputEmail = document.querySelector('#email');
+    const inputMsg = document.querySelector('#message');
+    let formBox = document.querySelector('#formBox');
+
+    formContact.addEventListener('submit', (e) => {
+        e.preventDefault();;
+        [inputFirst, inputName, inputEmail, inputMsg].forEach(element => {
+            console.log(element.id + ': ' + element.value + ';');
+        });
+        alert('Message envoyé !');
+        formBox.style.opacity = 0;
+        setTimeout(() => { formBox.style.display = "none"; }, 500);
+    });
 }
 
 /**

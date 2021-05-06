@@ -317,6 +317,98 @@ main {
             }
         }
     }
+    & > #formBox {
+        width: 100%;
+        height: 100%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: #c4c4c47d;
+        opacity: 0;
+        z-index: 3;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        transition: all 0.5s;
+        & > div {
+            width: 100%;
+            max-width: 415px;
+            height: 100%;
+            max-height: 654px;
+            padding: 0.8em;
+            background: $color4;
+            & > em {
+                color: white;
+                font-size: 1.5em;
+                cursor: pointer;
+                width: 100%;
+                text-align: end;
+                transition: all 0.5s;
+                &:hover {
+                    color: $color1;
+                }
+            }
+            & > h1 {
+                font-family: $police1;
+                font-weight: 400;
+                font-size: 1.8em;
+                margin-top: -1em;
+                margin-bottom: 1em;
+                width: 220px;
+            }
+            & > form {
+                font-family: $police1;
+                width: 99%;
+                text-align: left;
+                & > label {
+                    font-size: 1.3em;
+                    font-weight: 400;
+                    display: block;
+                }
+                & > input {
+                    width: 100%;
+                    height: 41px;
+                    border: none;
+                    font-size: 1.4em;
+                    border-radius: 4px;
+                    margin-top: 0.35em;
+                    margin-bottom: 0.8em;
+                }
+                & > textarea {
+                    width: 100%;
+                    max-width: 409px;
+                    height: 130px;
+                    max-height: 130px;
+                    border: none;
+                    font-size: 1.4em;
+                    border-radius: 4px;
+                    margin-top: 0.35em;
+                    margin-bottom: 1em;
+                }
+                & > #submit {
+                    color: white;
+                    background: $color1;
+                    border: none;
+                    border-radius: 4px;
+                    font-family: $police1;
+                    font-size: 0.9em;
+                    width: 10em;
+                    height: 30px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    display: flex;
+                    justify-content: center;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: all 0.4s;
+                    &:hover, &:focus, &:active {
+                        color: black;
+                        background-color: $color2;
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -400,6 +492,25 @@ main {
                     max-width: 76%;
                     max-height: 720px;
                 }
+            }
+        }
+        & > #formBox > div {   
+            padding: 1em;
+            border-radius: 4px;
+            box-shadow: -3px 0px 20px 0px #00000061;
+            & > em {
+                font-size: 2em;
+            }
+            & > h1 {
+                font-size: 2.5em;
+                margin-bottom: 0.45em;
+                width: 305px;
+            }
+            & > form > #submit {
+                margin-top: -0.15em;
+                height: 50px;
+                margin-left: initial;
+                margin-right: initial;
             }
         }
     }

@@ -50,6 +50,25 @@
         <section id="media">
             <!-- Média du photographe -->
         </section>
+        <!-- Formulaire de contact -->
+        <div id="formBox" role="dialog">
+            <div aria-label="contact me">
+                <em class="fas fa-times closeFormBox" aria-hidden="true" tabindex="0" aria-label="Close contact form"></em>
+                <h1>Contactez-moi</h1>
+                <form>
+                    <label for="prénom">Prénom</label>
+                    <input type="text" name="prénom" id="prénom" aria-label="Renseignez votre prénom" aria-describedby="prénom" minlength="3" aria-required="true" required>
+                    <label for="nom">Nom</label>
+                    <input type="text" name="nom" id="nom" aria-label="Renseignez votre nom" aria-describedby="nom" minlength="3" aria-required="true" required>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" aria-label="Renseignez votre email" aria-describedby="email" aria-required="true" required>
+                    <label for="message">Votre message</label>
+                    <textarea name="message" id="message" cols="30" rows="10" minlength="25" maxlength="255" aria-label="Renseignez votre message" aria-describedby="message" aria-required="true" required></textarea>
+                    <input type="submit" id="submit" value="Envoyer" aria-label="Envoyer le formulaire de contact">
+                </form>
+            </div>
+        </div>
+        <!-- Modal lightbox média -->
         <div id="lightbox" role="dialog">
             <div aria-label="image closeup view">
                 <em class="fas fa-times closeLightbox" aria-hidden="true" tabindex="0" aria-label="Close dialog"></em>

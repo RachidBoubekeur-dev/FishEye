@@ -5,6 +5,6 @@ alert(page);
 fetch('data.json')
     .then(response => response.json())
     .then(data => {
-        if (page === "index.html") initPhotographer(data['photographers'])
+        if (page === "index.html=") initPhotographer(data['photographers'])
         else initDataPage(data['photographers'], data['media'])
     })

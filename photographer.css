@@ -31,7 +31,7 @@ main > p {
 main > p > img {
   margin-top: 80px;
   width: 180px;
-  height: fit-content;
+  height: max-content;
 }
 main > noscript {
   position: absolute;
@@ -209,6 +209,8 @@ main > #divTrie > div > button {
 main > #divTrie > div > button:nth-of-type(1) {
   margin-top: -3px;
   margin-bottom: -4px;
+  width: 108%;
+  text-align: left;
 }
 main > #divTrie > div > button:nth-of-type(2) {
   border-top: 1px solid white;
@@ -251,6 +253,7 @@ main > section:nth-of-type(2) > article {
 }
 main > section:nth-of-type(2) > article > p > img {
   width: 100%;
+  min-width: 286px;
   height: 190px;
   object-fit: cover;
   object-position: 50% 50%;
@@ -404,6 +407,7 @@ main > #formBox > div {
   height: 100%;
   max-height: 654px;
   padding: 0.8em;
+  padding-top: 2em;
   background: #DB8876;
 }
 main > #formBox > div > em {
@@ -423,7 +427,7 @@ main > #formBox > div > h1 {
   font-size: 1.8em;
   margin-top: -1em;
   margin-bottom: 1em;
-  width: 220px;
+  width: 260px;
 }
 main > #formBox > div > form {
   font-family: "DM Sans";
@@ -527,6 +531,7 @@ main > #formBox > div > form > #submit:hover, main > #formBox > div > form > #su
   }
   main > section:nth-of-type(2) > article > p > img {
     height: 300px;
+    min-width: 350px;
   }
   main > section:nth-of-type(2) > article > .name, main > section:nth-of-type(2) > article .price, main > section:nth-of-type(2) > article .likes {
     font-size: 1.2em;
@@ -562,11 +567,12 @@ main > #formBox > div > form > #submit:hover, main > #formBox > div > form > #su
   }
   main > #formBox > div > em {
     font-size: 2em;
+    margin-top: 0.2em;
   }
   main > #formBox > div > h1 {
     font-size: 2.5em;
     margin-bottom: 0.45em;
-    width: 305px;
+    width: 370px;
   }
   main > #formBox > div > form > #submit {
     margin-top: -0.15em;

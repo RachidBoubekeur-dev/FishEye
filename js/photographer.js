@@ -258,7 +258,7 @@ function handleFiltreTag() {
                         }
                         listTag.querySelectorAll('a.tag')[i].style.color = "white";
                         listTag.querySelectorAll('a.tag')[i].style.background = "#901C1C";
-                        let isFiltreTag = ({tags}) => tags[0] === tag.textContent.split('#')[1];
+                        let isFiltreTag = ({ tags }) => tags[0] === tag.textContent.split('#')[1];
                         let arrayMediaFiltreTag = arrayMedia.filter(isFiltreTag);
                         let htmlMedia = initHtmlMedia(arrayMediaFiltreTag);
                         displayHtml(htmlMedia);
@@ -372,7 +372,7 @@ function handleModalButton() {
             selector.addEventListener(element, () => {
                 let articleMediaMax;
                 for (let i = 0; i < arrayMedia.length; i++) {
-                    if(!sectionMedia.querySelectorAll('article')[i]){
+                    if (!sectionMedia.querySelectorAll('article')[i]) {
                         articleMediaMax = i - 1;
                         break;
                     } else {
@@ -429,7 +429,7 @@ function handleModalButton() {
         } else if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
             let articleMediaMax;
             for (let i = 0; i < arrayMedia.length; i++) {
-                if(!sectionMedia.querySelectorAll('article')[i]){
+                if (!sectionMedia.querySelectorAll('article')[i]) {
                     articleMediaMax = i - 1;
                     break;
                 } else {

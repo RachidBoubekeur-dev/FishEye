@@ -105,7 +105,7 @@ function initHtmlFiltrePhotographer(photographers, filtre) {
  * @return {String} renvoi la liste des photographes et le filtre de navigation cliqué a la function initPhotographer
  */
 function handleNavFiltreTag(photographers) {
-    let navTag = document.querySelector('nav > ul');
+    const navTag = document.querySelector('nav > ul');
     // Parcours tous les filtres
     for (let i = 0; i < 8; i++) {
         let filtreNav = navTag.querySelectorAll('a.tag')[i];

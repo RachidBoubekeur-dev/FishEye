@@ -12,13 +12,13 @@ class Media {
     }
 }
 
-let idPhotographe = decodeURIComponent(urlPage).split('?id=')[1].split('#')[0];
-let divTrie = document.querySelector('.trie');
-let button1 = document.querySelector('.default');
-let button2 = document.querySelector('.option1');
-let button3 = document.querySelector('.option2');
-let sectionMedia = document.querySelector('#media');
-let lightbox = document.querySelector('#lightbox');
+const idPhotographe = decodeURIComponent(urlPage).split('?id=')[1].split('#')[0];
+const divTrie = document.querySelector('.trie');
+const button1 = document.querySelector('.default');
+const button2 = document.querySelector('.option1');
+const button3 = document.querySelector('.option2');
+const sectionMedia = document.querySelector('#media');
+const lightbox = document.querySelector('#lightbox');
 
 ['click', 'keypress'].forEach(element => {
     divTrie.addEventListener(element, () => {
@@ -43,8 +43,8 @@ let lightbox = document.querySelector('#lightbox');
 [button2, button3].forEach(selector => {
     ['click', 'keypress'].forEach(element => {
         selector.addEventListener(element, () => {
-            let value1 = button1.textContent;
-            let value2 = selector.textContent;
+            const value1 = button1.textContent;
+            const value2 = selector.textContent;
             button1.textContent = value2;
             button1.ariaLabel = 'Filtre ' + value2;
             selector.textContent = value1;
@@ -60,10 +60,10 @@ let lightbox = document.querySelector('#lightbox');
  * @param {Array} media liste des média
  */
 function initDataPage(photographers, media) {
-    let htmlPhotographer = initHtmlPhotographer(photographers);
+    const htmlPhotographer = initHtmlPhotographer(photographers);
     initDataMedia(media);
     initMediaTrie(filtre = false);
-    let htmlMedia = initHtmlMedia();
+    const htmlMedia = initHtmlMedia();
     displayHtml(htmlMedia, htmlPhotographer);
     handleModalForm();
     handleFiltreTag();
@@ -129,7 +129,7 @@ function initMediaTrie(filtre) {
     else if (filtre === 'Titre') arrayMedia.sort((a, b) => a.alt.localeCompare(b.alt));
     localStorage.setItem('arrayMedia', JSON.stringify(arrayMedia));
     if (filtre) {
-        let htmlMedia = initHtmlMedia();
+        const htmlMedia = initHtmlMedia();
         displayHtml(htmlMedia);
         handleLikeMedia(JSON.stringify(arrayMedia));
         handleModalMedia(JSON.stringify(arrayMedia));
@@ -155,9 +155,9 @@ function initHtmlMedia(filtreTag = false) {
     else arrayMedia = filtreTag;
     // Parcours la liste des média du photographe
     for (let i = 0; i < arrayMedia.length; i++) {
-        let typeMedia = arrayMedia[i].media.split('.')[1];
-        let srcMedia = localStorage.getItem('Name').split(' ')[0].split('-').join('_') + "/" + arrayMedia[i].media.replace('mp4', 'webp');
-        let nameImage = arrayMedia[i].alt.split(',')[0];
+        const typeMedia = arrayMedia[i].media.split('.')[1];
+        const srcMedia = localStorage.getItem('Name').split(' ')[0].split('-').join('_') + "/" + arrayMedia[i].media.replace('mp4', 'webp');
+        const nameImage = arrayMedia[i].alt.split(',')[0];
         totalLikes += arrayMedia[i].likes;
         // Ajout successif des média du photographe
         htmlMedia += "<article class=\"" + arrayMedia[i].id + "\" role=\"document\"><p><img class=\"" + typeMedia + "\" src=\"Sample_Photos/" + srcMedia + "\" alt=\"" + arrayMedia[i].alt
@@ -190,9 +190,9 @@ function displayHtml(htmlMedia, htmlPhotographer = false) {
  * handleModalForm - ouvre ou ferme la modal form contact
  */
 function handleModalForm() {
-    let contact = document.querySelector('#contact');
-    let formBox = document.querySelector('#formBox');
-    let closeFormBox = document.querySelector('.closeFormBox');
+    const contact = document.querySelector('#contact');
+    const formBox = document.querySelector('#formBox');
+    const closeFormBox = document.querySelector('.closeFormBox');
     document.querySelector('#formBox > div').ariaLabel += " " + localStorage.getItem('Name');
     document.querySelector('#formBox > div > h1').textContent += " " + localStorage.getItem('Name');
     ['click', 'keypress'].forEach(element => {
@@ -247,7 +247,7 @@ function handleFiltreTag() {
             let tag = listTag.querySelectorAll('a.tag')[i];
             ['click', 'keypress'].forEach(element => {
                 tag.addEventListener(element, () => {
-                    let arrayMedia = JSON.parse(localStorage.getItem('arrayMedia'));
+                    const arrayMedia = JSON.parse(localStorage.getItem('arrayMedia'));
                     // Si le même tag n'est pas déjà activé
                     if (listTag.querySelectorAll('a.tag')[i].style.color !== "white") {
                         for (let y = 0; y < 4; y++) {
@@ -258,16 +258,16 @@ function handleFiltreTag() {
                         }
                         listTag.querySelectorAll('a.tag')[i].style.color = "white";
                         listTag.querySelectorAll('a.tag')[i].style.background = "#901C1C";
-                        let isFiltreTag = ({ tags }) => tags[0] === tag.textContent.split('#')[1];
-                        let arrayMediaFiltreTag = arrayMedia.filter(isFiltreTag);
-                        let htmlMedia = initHtmlMedia(arrayMediaFiltreTag);
+                        const isFiltreTag = ({ tags }) => tags[0] === tag.textContent.split('#')[1];
+                        const arrayMediaFiltreTag = arrayMedia.filter(isFiltreTag);
+                        const htmlMedia = initHtmlMedia(arrayMediaFiltreTag);
                         displayHtml(htmlMedia);
                         handleLikeMedia(JSON.stringify(arrayMediaFiltreTag), filtreTag = true);
                         handleModalMedia(JSON.stringify(arrayMediaFiltreTag));
                     } else {
                         listTag.querySelectorAll('a.tag')[i].style.color = "#901C1C";
                         listTag.querySelectorAll('a.tag')[i].style.background = "none";
-                        let htmlMedia = initHtmlMedia(arrayMedia);
+                        const htmlMedia = initHtmlMedia(arrayMedia);
                         displayHtml(htmlMedia);
                         handleLikeMedia(JSON.stringify(arrayMedia));
                         handleModalMedia(JSON.stringify(arrayMedia));
@@ -299,7 +299,7 @@ function handleLikeMedia(arrayMedia = false, filtreTag = false) {
                     totalLikes.innerHTML = (parseInt(totalLikes.textContent) - 1) + " <em class=\"fas fa-heart\" aria-hidden=\"true\"></em>";
                 }
                 if (filtreTag) {
-                    let idMedia = parseInt(sectionMedia.querySelector('article').className);
+                    const idMedia = parseInt(sectionMedia.querySelector('article').className);
                     let origineArrayMedia = JSON.parse(localStorage.getItem('arrayMedia'));
                     let positionMedia;
                     for (let y = 0; y < origineArrayMedia.length; y++) {
@@ -329,7 +329,7 @@ function handleModalMedia(arrayMedia = false) {
     for (let i = 0; i < arrayMedia.length; i++) {
         let media = sectionMedia.querySelectorAll('article > p > img')[i];
         let typeMedia = media.className;
-        let nameMedia = sectionMedia.querySelectorAll('article > p.name')[i].textContent;
+        const nameMedia = sectionMedia.querySelectorAll('article > p.name')[i].textContent;
         ['click', 'keypress'].forEach(element => {
             media.addEventListener(element, () => {
                 lightbox.style.display = "flex";
@@ -358,9 +358,9 @@ function handleModalMedia(arrayMedia = false) {
  */
 function handleModalButton() {
     arrayMedia = JSON.parse(localStorage.getItem('arrayMedia'));
-    let closeLightbox = document.querySelector('.closeLightbox');
-    let nextLightbox = document.querySelector('.nextLightbox');
-    let previousLightbox = document.querySelector('.previousLightbox');
+    const closeLightbox = document.querySelector('.closeLightbox');
+    const nextLightbox = document.querySelector('.nextLightbox');
+    const previousLightbox = document.querySelector('.previousLightbox');
     // Au click souris ou entrée
     [nextLightbox, previousLightbox].forEach(selector => {
         ['click', 'keypress'].forEach(element => {

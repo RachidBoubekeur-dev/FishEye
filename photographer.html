@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="FishEye - Retrouvez le profil de votre photographe freelance" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+    <!-- Facebook Card -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="FishEye - Profil de votre photographe freelance">
+    <meta property="og:image" content="Sample_Photos/logo.webp">
+    <meta property="og:description" content="FishEye - Retrouvez le profil de votre photographe freelances">
+    <meta property="og:site_name" content="FishEye">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <!-- Twitter Card -->
+    <meta name="twitter:title" content="FishEye - Page de votre photographes freelances">
+    <meta name="twitter:description" content="FishEye - Retrouvez le profil de votre photographes freelances">
+    <meta name="twitter:image" content="Sample_Photos/logo.webp">
+    <link rel="icon" type="image/png" href="Sample_Photos/favicon.webp">
+    <link rel="stylesheet" href="photographer.css" />
+    <script async src="js/index.js"></script>
+    <script async src="js/photographer.js"></script>
+    <script async src="https://kit.fontawesome.com/23eb318271.js" crossorigin="anonymous"></script>
+    <title>FishEye - Profil de votre photographe freelance</title>
+</head>
+
+<body>
+    <header>
+        <a href="index.html" aria-label="Lien page principal"><img src="Sample_Photos/logo.webp"
+                alt="Logo de FishEye - Page d'accueil" /></a>
+    </header>
+    <main>
+        <p><img src="Sample_Photos/loading.gif" alt="Chargement de la page photographe" /></p>
+        <noscript>Vous devez activer JavaScript pour naviguer sur FishEye.</noscript>
+        <section id="info">
+            <!-- Info du photographe -->
+        </section>
+        <div id="divTrie">
+            <span>Trier par</span>
+            <div class="trie" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false">
+                <em class="fas fa-chevron-up"></em>
+                <button class="default" role="listbox" aria-activedescendant="false" aria-selected="true"
+                    aria-label="Filtre Popularité">Popularité</button>
+                <button class="option1" role="listbox" aria-activedescendant="false" aria-selected="false"
+                    aria-label="Filre Date">Date</button>
+                <button class="option2" role="listbox" aria-activedescendant="false" aria-selected="false"
+                    aria-label="Filtre Titre">Titre</button>
+            </div>
+        </div>
+        <section id="media">
+            <!-- Média du photographe -->
+        </section>
+        <!-- Formulaire de contact -->
+        <div id="formBox" role="dialog">
+            <div aria-label="contact me">
+                <em class="fas fa-times closeFormBox" aria-hidden="true" tabindex="0"
+                    aria-label="Close contact form"></em>
+                <h1>Contactez-moi</h1>
+                <form>
+                    <label for="prénom">Prénom</label>
+                    <input type="text" name="prénom" id="prénom" aria-label="Renseignez votre prénom"
+                        aria-describedby="prénom" minlength="3" aria-required="true" required>
+                    <label for="nom">Nom</label>
+                    <input type="text" name="nom" id="nom" aria-label="Renseignez votre nom" aria-describedby="nom"
+                        minlength="3" aria-required="true" required>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" aria-label="Renseignez votre email"
+                        aria-describedby="email" aria-required="true" required>
+                    <label for="message">Votre message</label>
+                    <textarea name="message" id="message" cols="30" rows="10" minlength="25" maxlength="255"
+                        aria-label="Renseignez votre message" aria-describedby="message" aria-required="true"
+                        required></textarea>
+                    <input type="submit" id="submit" value="Envoyer" aria-label="Envoyer le formulaire de contact">
+                </form>
+            </div>
+        </div>
+        <!-- Modal lightbox média -->
+        <div id="lightbox" role="dialog">
+            <div aria-label="image closeup view">
+                <em class="fas fa-times closeLightbox" aria-hidden="true" tabindex="0" aria-label="Close dialog"></em>
+                <em class="fas fa-chevron-up previousLightbox" aria-hidden="true" tabindex="0"
+                    aria-label="Previous image"></em>
+                <em class="fas fa-chevron-up nextLightbox" aria-hidden="true" tabindex="0" aria-label="Next image"></em>
+                <p id="pMedia" class="0">
+                    <img class="media" src="" alt="">
+                    <video class="mediaVideo" controls src="" poster="">
+                        Votre navigateur ne prend pas en charge les vidéos mp4.
+                        Mais vous pouvez toujours <a href="">la télécharger</a> !
+                    </video>
+                </p>
+                <p class="nameMedia"></p>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

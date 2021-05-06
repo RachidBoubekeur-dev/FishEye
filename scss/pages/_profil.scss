@@ -1,0 +1,647 @@
+header {
+    width: 97%;
+    margin-top: 1.9em;
+    margin-left: auto;
+}
+
+main {
+    & > section:nth-of-type(1) {
+        opacity: 0;
+        width: 94%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1.5em;
+        font-family: $police1;
+        transition: all 0.4s;
+        & > div:nth-of-type(1) {
+            & > h1 {
+                color: $color2;
+                font-size: 2.15em;
+                font-weight: normal;
+                margin-top: 0.5em;
+                width: 70%;
+            }
+            & > .location {
+                color: $color1;
+                font-size: 0.75em;
+                font-weight: 400;
+                margin-top: -2.7em;
+            }
+            & > .tagline {
+                font-size: 0.72em;
+                font-weight: 400;
+                margin-top: -0.8em;
+                margin-bottom: 0.2em;
+                color: $color3;
+            }
+            & > .tag {
+                @include tag;
+                font-size: 0.7em;
+                padding: 0px;
+                padding-left: 5px;
+                padding-right: 5px;
+                margin-right: 2px;
+                margin-left: 2px;
+                margin-bottom: 0.3em;
+            }
+        }
+        & > div:nth-of-type(2) {
+            width: 100%;
+            text-align: center;
+            position: fixed;
+            left: 0px;
+            bottom: 5%;
+            & > #contact {
+                color: white;
+                background: $color1;
+                border: none;
+                border-radius: 4px;
+                font-size: 0.99em;
+                padding: 4px;
+                font-family: $police1;
+                width: 9.25em;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.4s;
+                &:hover, &:focus, &:active {
+                    color: black;
+                    background-color: $color4;
+                }
+            }
+        }
+        & > p > img {
+            @include profilImg;
+            position: absolute;
+            top: 5.15em;
+            right: 5%;
+            width: 83px;
+            height: 83px;
+            top: 5.15em;
+            right: 6%;
+            &:hover, &:focus, &:active {
+                filter: none;
+            }
+        }
+    }
+    & > #divTrie {
+        display: none;
+        width: 96%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1%;
+        margin-top: 1.5em;
+        margin-bottom: 2em;
+        font-family: $police1;
+        font-weight: 600;
+        font-size: 0.85em;
+        & > span {
+            margin-right: 1.65em;
+        }
+        & > div {
+            background: $color1;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-end;
+            position: absolute;
+            margin-top: -0.9em;
+            width: 105px;
+            height: auto;
+            border: 7.5px solid $color1;
+            border-left: 11px solid $color1;
+            border-right: 11px solid $color1;
+            border-radius: 3px;
+            z-index: 1;
+            transition: all 0.6s;
+            cursor: pointer;
+            & > em {
+                transform: rotate(180deg);
+                font-size: 0.9em;
+                color: white;
+                transition: all 0.5s;
+                position: absolute;
+                margin-top: 0.9em;
+                margin-right: 0.3em;
+                cursor: pointer;
+            }
+            & > button {
+                background: $color1;
+                text-align: left;
+                color: white;
+                align-self: end;
+                font-family: $police1;
+                border: none;
+                padding: 11px;
+                font-size: 13px;
+                margin-left: -5px;
+                cursor: pointer;
+                transition: all 0.4s;
+            }
+            & > button:nth-of-type(1) {
+                margin-top: -3px;
+                margin-bottom: -4px;
+                width: 108%;
+                text-align: left;
+            }
+            & > button:nth-of-type(2) {
+                border-top: 1px solid white;
+                border-bottom: 1px solid white;
+                display: none;
+                width: 108%;
+                &:hover, &:focus, &:active {
+                    background: darken($color1, 3%);
+                }
+            }
+            & > button:nth-of-type(3) {
+                margin-bottom: -3px;
+                display: none;
+                width: 108%;
+                &:hover, &:focus, &:active {
+                    background: darken($color1, 3%);
+                }
+            }
+        }
+    }
+    & > section:nth-of-type(2) {
+        opacity: 0;
+        width: 94%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1.5em;
+        font-family: $police1;
+        transition: all 0.4s;
+        & > article {
+            display: flex;
+            flex-flow: wrap;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: -1.2em;
+            color: $color1;
+            width: 286px;
+            margin-left: auto;
+            margin-right: auto;
+            & > p > img {
+                width: 100%;
+                min-width: 286px;
+                height: 190px;
+                object-fit: cover;
+                object-position: 50% 50%;
+                border-radius: 5px;
+                margin-bottom: -1.6em;
+                cursor: pointer;
+                transition: all 0.4s;
+                &:hover, &:focus, &:active {
+                    filter: brightness(0.8);
+                }
+            }
+            & > .name {
+                font-size: 0.8em;
+                font-weight: 400;
+                flex: auto;
+                width: 100px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            & > .price {
+                font-size: 0.72em;
+                font-weight: 600;
+                margin-right: 15px;
+            }
+            & > .likes {
+                font-size: 0.8em;
+                font-weight: 600;
+                cursor: pointer;
+                &:hover, &:focus, &:active {
+                    filter: brightness(0.7);
+                }
+            }
+        }
+    
+        & > aside {
+            position: fixed;
+            right: 27px;
+            bottom: 0px;
+            width: 325px;
+            height: 48px;
+            border-radius: 5px 5px 0px 0px;
+            background: $color4;
+            font-size: 1.2em;
+            font-family: $police1;
+            font-weight: 600;
+            padding-top: 3px;
+            display: none;
+            align-items: center;
+            justify-content: space-around;
+        }
+    }
+    & > #lightbox {
+        width: 100%;
+        height: 100%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: #ffffffb8;
+        opacity: 0;
+        z-index: 3;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        transition: all 0.5s;
+        & > div {
+            width: 96%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            border-radius: 5px;
+            background: white;
+            & > .closeLightbox {
+                color: $color1;
+                cursor: pointer;
+                transition: all 0.5s;
+                font-size: 1.7em;
+                align-self: flex-end;
+                margin-right: 2.5%;
+                margin-bottom: -40px;
+                margin-top: 18px;
+                &:hover {
+                    color: $color2;
+                }
+            }
+            & > .previousLightbox {
+                color: $color1;
+                font-size: 1.7em;
+                position: absolute;
+                left: 3.5%;
+                cursor: pointer;
+                transform: rotate(270deg);
+                transition: all 0.5s;
+                &:hover {
+                    color: $color2;
+                }
+            }
+            & > .nextLightbox {
+                color: $color1;
+                font-size: 1.7em;
+                position: absolute;
+                right: 3.5%;
+                cursor: pointer;
+                transform: rotate(-270deg);
+                transition: all 0.5s;
+                &:hover {
+                    color: $color2;
+                }
+            }
+            & > #pMedia > .media {
+                max-width: 76%;
+                max-height: 708px;
+                border-radius: 5px;
+            }
+            & > #pMedia > .mediaVideo {
+                display: none;
+                max-width: 76%;
+                max-height: 708px;
+                border-radius: 5px;
+            }
+            & > .nameMedia {
+                color: $color1;
+                font-size: 1.15em;
+                font-family: $police1;
+                font-weight: 500;
+                text-align: left;
+                width: 86%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                margin-top: 0em;
+            }
+        }
+    }
+    & > #formBox {
+        width: 100%;
+        height: 100%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: #c4c4c47d;
+        opacity: 0;
+        z-index: 3;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        transition: all 0.5s;
+        & > div {
+            width: 100%;
+            max-width: 415px;
+            height: 100%;
+            max-height: 654px;
+            padding: 0.8em;
+            padding-top: 2em;
+            background: $color4;
+            & > em {
+                color: white;
+                font-size: 1.5em;
+                cursor: pointer;
+                width: 100%;
+                text-align: end;
+                transition: all 0.5s;
+                &:hover {
+                    color: $color1;
+                }
+            }
+            & > h1 {
+                font-family: $police1;
+                font-weight: 400;
+                font-size: 1.8em;
+                margin-top: -1em;
+                margin-bottom: 1em;
+                width: 260px;
+            }
+            & > form {
+                font-family: $police1;
+                width: 99%;
+                text-align: left;
+                & > label {
+                    font-size: 1.3em;
+                    font-weight: 400;
+                    display: block;
+                }
+                & > input {
+                    width: 100%;
+                    height: 41px;
+                    border: none;
+                    font-size: 1.4em;
+                    border-radius: 4px;
+                    margin-top: 0.35em;
+                    margin-bottom: 0.8em;
+                }
+                & > textarea {
+                    width: 100%;
+                    max-width: 409px;
+                    height: 130px;
+                    max-height: 130px;
+                    border: none;
+                    font-size: 1.4em;
+                    border-radius: 4px;
+                    margin-top: 0.35em;
+                    margin-bottom: 1em;
+                }
+                & > #submit {
+                    color: white;
+                    background: $color1;
+                    border: none;
+                    border-radius: 4px;
+                    font-family: $police1;
+                    font-size: 0.9em;
+                    width: 10em;
+                    height: 30px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    display: flex;
+                    justify-content: center;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: all 0.4s;
+                    &:hover, &:focus, &:active {
+                        color: black;
+                        background-color: $color2;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    main {
+        & > section:nth-of-type(1) {
+            background: #FAFAFA;
+            padding: 25px;
+            padding-top: 15px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 5px;
+            display: flex;
+            & > div:nth-of-type(1) > h1 {
+                width: auto;
+                margin-right: 50px;
+            }
+            & > div:nth-of-type(2) {
+                width: auto;
+                position: initial;
+                top: initial;
+                margin-left: initial;
+                margin-left: initial;
+                margin-top: 1.2em;
+                & > #contact {
+                    padding: initial;
+                    width: 8em;
+                    height: 2.5em;
+                    font-size: 0.95em;
+                }
+            }
+            & > p > img {
+                top: 8.5em;
+            }
+        }
+        & > #divTrie {
+            display: block;
+            & > button {
+                font-size: 14.5px;
+            }
+        }
+        & > section:nth-of-type(2) {
+            width: 96%;
+            justify-content: space-around;
+            & > article {
+                width: 350px;
+                margin-left: initial;
+                margin-right: initial;
+                margin-bottom: -0.7em;
+                & > p > img {
+                    height: 300px;
+                    min-width: 350px;
+                }
+                & > .name, .price, .likes {
+                    font-size: 1.2em;
+                }
+            }
+            & > aside {
+                display: flex;
+            }
+        }
+        & > #lightbox {
+            & > div {
+                & > .closeLightbox {
+                    font-size: 2em;
+                    right: 3%;
+                }
+                & > .previousLightbox {
+                    font-size: 2em;
+                    left: 4%;
+                }
+                & > .nextLightbox {
+                    font-size: 2em;
+                    right: 4%;
+                }
+                & > #pMedia > .media {
+                    max-width: 76%;
+                    max-height: 720px;
+                }
+                & > #pMedia > .mediaVideo {
+                    display: none;
+                    max-width: 76%;
+                    max-height: 720px;
+                }
+            }
+        }
+        & > #formBox > div {   
+            padding: 1em;
+            border-radius: 4px;
+            box-shadow: -3px 0px 20px 0px #00000061;
+            & > em {
+                font-size: 2em;
+                margin-top: 0.2em;
+            }
+            & > h1 {
+                font-size: 2.5em;
+                margin-bottom: 0.45em;
+                width: 370px;
+            }
+            & > form > #submit {
+                margin-top: -0.15em;
+                height: 50px;
+                margin-left: initial;
+                margin-right: initial;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1095px) {
+    header {
+        width: 92%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 3.4em;
+    }
+
+    main {
+        & > section:nth-of-type(1) {
+            width: 87%;
+            padding: 35px;
+            padding-top: 23px;
+            & > div:nth-of-type(1) {
+                & > h1 {
+                    font-size: 2.7em;
+                }
+                & > .location {
+                    font-size: 1.08em;
+                    margin-top: -2em;
+                }
+                & > .tagline {
+                    font-size: 0.8em;
+                    margin-top: -0.3em;
+                    margin-bottom: 1em;
+                }
+                & > .tag {
+                    font-size: 0.8em;
+                    padding: 0px;
+                    padding-left: 6px;
+                    padding-right: 6px;
+                }
+            }
+            & > div:nth-of-type(2) {
+                margin-top: 1.55em;
+                & > #contact {
+                    height: 3em;
+                    font-size: 1em;
+                }
+            }
+            & > p > img {
+                width: 150px;
+                height: 150px;
+                top: 9.85em;
+                right: 8%;
+            }
+        }
+        & > #divTrie {
+            width: 93%;
+            font-size: 1.05em;
+            & > div {
+                & > em {
+                    font-size: 0.85em;
+                    margin-top: 0.7em;
+                }
+                & > button {
+                    font-size: 14px;
+                }
+            }
+        }
+        & > section:nth-of-type(2) {
+            width: 93.5%;
+            justify-content: space-between;
+            & > article {
+                margin-left: 1em;
+                margin-right: 1em;
+            }
+        }
+        & > #lightbox {
+            & > div {
+                width: 1056px;
+                & > .closeLightbox {
+                    margin-left: 989px;
+                    right: initial;
+                }
+                & > .previousLightbox {
+                    margin-right: 989px;
+                    left: initial;
+                }
+                & > .nextLightbox {
+                    margin-left: 989px;
+                    right: initial;
+                }
+                & > #pMedia > .media {
+                    max-width: 910px;
+                    max-height: 550px;
+                }
+                & > #pMedia > .mediaVideo {
+                    display: none;
+                    max-width: 910px;
+                    max-height: 550px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    main {
+        & > section:nth-of-type(1) {
+            width: 1300px;
+            padding-bottom: 19px;
+            & > p > img {
+                margin-left: 587px;
+                position: initial;
+            }
+        }
+        & > #divTrie {
+            width: 1393px;
+            font-size: 1.2em;
+            & > div > em {
+                font-size: 0.7em;
+                margin-top: 0.8em;
+            }
+            & > button {
+                font-size: 15px;
+            }
+        }
+        & > section:nth-of-type(2) {
+            width: 1396px;
+        }
+    }
+}

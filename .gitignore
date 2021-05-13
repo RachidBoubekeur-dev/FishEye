@@ -1,4 +1,4 @@
-scss/
-dart-scss/
-style.css.map
-photographer.css.map
+dart-sass/
+node_modules/
+sass/
+*.map

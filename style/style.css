@@ -27,6 +27,9 @@ main > p {
   justify-content: center;
   z-index: 2;
   transition: all 0.4s;
+  max-width: 1660px;
+  margin-left: auto;
+  margin-right: auto;
 }
 main > p > img {
   margin-top: 80px;
@@ -43,6 +46,10 @@ main > noscript {
   font-family: "DM Sans";
   font-size: 1.25em;
   font-weight: 600;
+  max-width: 1660px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 2;
 }
 
 header {
@@ -199,6 +206,9 @@ main > section > article > .tag:hover, main > section > article > .tag:focus, ma
     margin-left: 2em;
     margin-right: 2em;
   }
+  main > section > article:nth-of-type(2) {
+    flex: initial;
+  }
 }
 @media screen and (min-width: 1095px) {
   header {
@@ -229,6 +239,9 @@ main > section > article > .tag:hover, main > section > article > .tag:focus, ma
   main > section > article {
     margin-top: 3em;
   }
+  main > section > article:nth-of-type(2) {
+    flex: 40%;
+  }
 }
 @media screen and (min-width: 1292px) {
   header > h1 {
@@ -236,8 +249,7 @@ main > section > article > .tag:hover, main > section > article > .tag:focus, ma
   }
 
   main > section > article:nth-of-type(2) {
-    margin-left: 12%;
-    margin-right: 12%;
+    flex: 42%;
   }
 }
 @media screen and (min-width: 1660px) {
@@ -246,9 +258,9 @@ main > section > article > .tag:hover, main > section > article > .tag:focus, ma
     margin-left: auto;
     margin-right: auto;
   }
-  body > main > section > article:nth-of-type(2) {
-    margin-left: 16%;
-    margin-right: 16%;
+
+  main > section > article:nth-of-type(2) {
+    flex: 44%;
   }
 }
 

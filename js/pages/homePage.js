@@ -131,7 +131,7 @@ const displayHtml = (htmlListData, filtre = false) => {
     document.querySelector('#contenu').innerHTML = htmlListData;
     window.addEventListener('click', () => {
         if (filtre) {
-            document.querySelector('header > p > a').style.display = 'none';
+            document.querySelector('header > p > a').style.opacity = 0;
             document.querySelector('section').style.justifyContent = 'space-evenly';
             if (section.querySelector('article:nth-of-type(2)')) section.querySelector('article:nth-of-type(2)').style.flex = 'initial';
             for (let i = 0; i < 8; i++) {
@@ -179,7 +179,7 @@ const displayHtml = (htmlListData, filtre = false) => {
                     }
                 }
             }
-            document.querySelector('header > p > a').style.display = 'block';
+            document.querySelector('header > p > a').style.opacity = 1;
             document.querySelector('section').style.justifyContent = 'space-between';
             if (window.screen.width >= 1660) section.querySelector('article:nth-of-type(2)').style.flex = '44%';
             else if (window.screen.width >= 1292) section.querySelector('article:nth-of-type(2)').style.flex = '42%';
